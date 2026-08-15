@@ -551,6 +551,9 @@ button, select { font: inherit; }
   height: 100%;
   object-fit: cover;
 }
+.booking-visual img[hidden] {
+  display: none;
+}
 .booking-visual.is-pending,
 .booking-visual.is-error {
   display: grid;
