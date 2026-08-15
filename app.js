@@ -125,61 +125,6 @@ const currency = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0
 });
 
-function installRuntimeStyles() {
-  const style = document.createElement("style");
-  style.dataset.runtimeFixes = "christmas-collection";
-  style.textContent = `
-    .story-media {
-      aspect-ratio: 8 / 5 !important;
-      background-color: #d7d2c8;
-      background-repeat: no-repeat;
-      background-size: 300% 300%;
-      overflow: hidden;
-      transform: translateZ(0);
-    }
-    .story-wide .story-media { aspect-ratio: 8 / 5 !important; }
-
-    .ec-oval-mark {
-      display: block !important;
-      width: 76px !important;
-      height: 38px !important;
-      object-fit: contain !important;
-      flex: 0 0 auto;
-    }
-    .hero-byline {
-      display: flex !important;
-      align-items: center;
-      gap: .75rem !important;
-    }
-    .hero-byline .ec-oval-mark {
-      width: 86px !important;
-      height: 42px !important;
-    }
-    .footer-ec .ec-oval-mark {
-      width: 92px !important;
-      height: 44px !important;
-    }
-
-    @media (max-width: 680px) {
-      .brand .ec-oval-mark {
-        width: 58px !important;
-        height: 30px !important;
-      }
-      .hero-byline .ec-oval-mark {
-        width: 72px !important;
-        height: 36px !important;
-      }
-      .footer-ec .ec-oval-mark {
-        width: 78px !important;
-        height: 38px !important;
-      }
-      .hero h1 > em { margin-top: .16em !important; }
-      .collection-intro { padding-top: 4.25rem !important; }
-    }
-  `;
-  document.head.appendChild(style);
-}
-
 function applyBrandMark() {
   document.querySelectorAll('img[src="assets/ec-mark.webp"]').forEach((img) => {
     img.src = "assets/ec-oval.webp";
@@ -301,7 +246,6 @@ function updatePreviewRibbon() {
   }
 }
 
-installRuntimeStyles();
 applyBrandMark();
 renderSchedule();
 populateBookingSelect();
