@@ -5,7 +5,7 @@ const COLLECTIONS = [
     time: "11:30 AM to 2:30 PM",
     price: 595,
     location: "The Cottage · Indoors",
-    bookingUrl: ""
+    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/The-Winter-Cottage"
   },
   {
     name: "Pine + Plaid",
@@ -13,7 +13,7 @@ const COLLECTIONS = [
     time: "2:30 PM to 5:00 PM",
     price: 650,
     location: "The Cottage · Outdoors",
-    bookingUrl: ""
+    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/Pine-Plaid"
   },
   {
     name: "A Crimson Christmas",
@@ -21,7 +21,7 @@ const COLLECTIONS = [
     time: "11:00 AM to 4:30 PM",
     price: 595,
     location: "Mint Studios",
-    bookingUrl: ""
+    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/A-Crimson-Christmas"
   },
   {
     name: "Velvet December",
@@ -29,7 +29,7 @@ const COLLECTIONS = [
     time: "2:00 PM to 4:30 PM",
     price: 595,
     location: "Mint Studios",
-    bookingUrl: ""
+    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/Velvet-December"
   },
   {
     name: "Little Women",
@@ -37,7 +37,7 @@ const COLLECTIONS = [
     time: "1:00 PM to 3:00 PM",
     price: 650,
     location: "Limited Holiday Story",
-    bookingUrl: ""
+    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/Little-Women"
   },
   {
     name: "Christmas Bound",
@@ -45,7 +45,7 @@ const COLLECTIONS = [
     time: "3:00 PM to 5:00 PM",
     price: 650,
     location: "Vintage Car Event · 4 sessions",
-    bookingUrl: ""
+    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/Christmas-Bound"
   },
   {
     name: "Chestnut Christmas",
@@ -53,7 +53,7 @@ const COLLECTIONS = [
     time: "11:00 AM to 4:30 PM",
     price: 595,
     location: "Mint Studios",
-    bookingUrl: ""
+    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/Chestnut-Christmas"
   },
   {
     name: "The Winter Carousel",
@@ -61,7 +61,7 @@ const COLLECTIONS = [
     time: "1:30 PM to 3:30 PM",
     price: 595,
     location: "Mint Studios",
-    bookingUrl: ""
+    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/The-Winter-Carousel"
   },
   {
     name: "Salt + Pine",
@@ -118,17 +118,8 @@ const currency = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0
 });
 
-function loadPhotoStyles() {
-  if (document.querySelector('link[href="media.css"]')) return;
-
-  const link = document.createElement("link");
-  link.rel = "stylesheet";
-  link.href = "media.css";
-  document.head.appendChild(link);
-}
-
 function attachStoryImages() {
-  document.querySelectorAll(".story").forEach((story) => {
+  document.querySelectorAll(".story").forEach((story, index) => {
     const heading = story.querySelector("h3");
     if (!heading) return;
 
@@ -141,8 +132,14 @@ function attachStoryImages() {
     const img = document.createElement("img");
     img.src = image.src;
     img.alt = image.alt;
-    img.loading = "lazy";
+    img.loading = index === 0 ? "eager" : "lazy";
     img.decoding = "async";
+    if (index === 0) img.fetchPriority = "high";
+
+    img.addEventListener("error", () => {
+      figure.remove();
+      story.classList.remove("has-photo");
+    }, { once: true });
 
     figure.appendChild(img);
     story.prepend(figure);
@@ -205,7 +202,7 @@ function setSelectedStory(name) {
     button.textContent = "Booking link coming soon";
     button.classList.add("is-disabled");
     button.setAttribute("aria-disabled", "true");
-    status.textContent = "This collection is ready for its booking URL. Add the link in app.js before sharing the page with clients.";
+    status.textContent = "Salt + Pine booking access will be added here once its reservation link is live.";
   }
 }
 
@@ -225,7 +222,6 @@ function updatePreviewRibbon() {
   }
 }
 
-loadPhotoStyles();
 attachStoryImages();
 renderSchedule();
 populateBookingSelect();
