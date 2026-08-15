@@ -36,6 +36,12 @@ The site uses native responsive images for the collection cards. Every published
 
 Current photography is mapped to all nine stories, including the approved Cottage, Chestnut, and vintage car photographs.
 
+Carousel descriptions are deliberately edited into balanced, complete-sentence summaries. Do not line-clamp or truncate them. Equal card height comes from the flex layout and bottom-pinned date and booking controls. The complete story copy lives in `collections.js` and appears under **The Story** on each booking page.
+
+The 1200 × 630 link-preview image is `assets/greetings-from-christmas-share.jpg`. Keep the Open Graph and Twitter image metadata in both `index.html` and `booking.html` pointed to its absolute production URL so text-message and social previews remain intentional.
+
+At 680px and below, the centered brand is paired with a native `<details>` hamburger menu for Dates and Booking. Preserve the desktop links for larger screens and keep the mobile menu keyboard-operable.
+
 ## Public launch
 
 The client preview ribbon automatically switches to the public-open state on September 1, 2026.
