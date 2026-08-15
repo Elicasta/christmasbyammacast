@@ -16,7 +16,7 @@ Client-facing landing page for the 2026 holiday collection.
 
 ## Booking links
 
-Booking buttons use the Pixieset reservation URLs stored in `collections.js`. Eight collections currently have active links; Salt + Pine remains disabled until its reservation URL is supplied.
+Booking buttons use the Pixieset reservation URLs stored in `collections.js`. All nine collections currently have active reservation links.
 
 Add or update the `bookingUrl` value for a collection in `collections.js`:
 
@@ -34,7 +34,7 @@ Once a URL is present, the page automatically enables the button for that collec
 
 The site uses native responsive images for the collection cards. Every published image must be a valid browser-readable file in `assets/`; a failed image shows a controlled fallback instead of silently collapsing the card.
 
-Current photography is mapped to eight stories. `Christmas Bound` intentionally remains text-only until its approved car image is supplied. Add that image as `assets/christmas-bound.webp`, then place its figure in the matching article in `index.html`.
+Current photography is mapped to all nine stories, including the approved vintage car photograph for `Christmas Bound`.
 
 ## Public launch
 
