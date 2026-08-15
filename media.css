@@ -40,7 +40,7 @@
   aspect-ratio: 21 / 9;
 }
 
-.story:nth-of-type(1) .story-media img { object-position: center 38%; }
+.story:nth-of-type(1) .story-media img { object-position: center 52%; }
 .story:nth-of-type(2) .story-media img { object-position: center 52%; }
 .story:nth-of-type(3) .story-media img { object-position: center 48%; }
 .story:nth-of-type(4) .story-media img { object-position: center 50%; }
@@ -53,14 +53,14 @@
 @media (max-width: 680px) {
   .story-media {
     margin-bottom: 1.4rem;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 9;
   }
 
   .story-wide .story-media {
     aspect-ratio: 16 / 10;
   }
 
-  .story:nth-of-type(1) .story-media img { object-position: center 35%; }
+  .story:nth-of-type(1) .story-media img { object-position: center 52%; }
 }
 
 @media (prefers-reduced-motion: reduce) {

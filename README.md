@@ -4,15 +4,15 @@ Client-facing landing page for the 2026 holiday collection.
 
 ## Current collection
 
-- The Winter Cottage — Oct 24, 11:30 AM–2:30 PM — $595
-- Pine + Plaid — Oct 24, 2:30–5:00 PM — $650
-- A Crimson Christmas — Nov 7, 11:00 AM–4:30 PM — $595
-- Velvet December — Nov 8, 2:00–4:30 PM — $595
-- Little Women — Nov 14, 1:00–3:00 PM — $650
-- Christmas Bound — Nov 15, 3:00–5:00 PM — $650
-- Chestnut Christmas — Nov 21, 11:00 AM–4:30 PM — $595
-- The Winter Carousel — Nov 22, 1:30–3:30 PM — $595
-- Salt + Pine — Nov 28, 3:00–5:00 PM — $650
+- The Winter Cottage — Oct 24, 11:30 AM–2:30 PM
+- Pine + Plaid — Oct 24, 2:30–5:00 PM
+- A Crimson Christmas — Nov 7, 11:00 AM–4:30 PM
+- Velvet December — Nov 8, 2:00–4:30 PM
+- Little Women — Nov 14, 1:00–3:00 PM
+- Christmas Bound — Nov 15, 3:00–5:00 PM
+- Chestnut Christmas — Nov 21, 11:00 AM–4:30 PM
+- The Winter Carousel — Nov 22, 1:30–3:30 PM
+- Salt + Pine — Nov 28, 3:00–5:00 PM
 
 ## Booking links
 
@@ -34,7 +34,7 @@ Once a URL is present, the page automatically enables the button for that collec
 
 The site uses native responsive images for the collection cards. Every published image must be a valid browser-readable file in `assets/`; a failed image shows a controlled fallback instead of silently collapsing the card.
 
-Current photography is mapped to all nine stories, including the approved vintage car photograph for `Christmas Bound`.
+Current photography is mapped to all nine stories, including the approved Cottage, Chestnut, and vintage car photographs.
 
 ## Public launch
 

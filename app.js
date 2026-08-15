@@ -1,11 +1,5 @@
 const COLLECTIONS = window.HOLIDAY_COLLECTIONS || [];
 
-const currency = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  maximumFractionDigits: 0
-});
-
 function bindImageFallbacks(root = document) {
   root.querySelectorAll(".story-media img, .booking-visual img").forEach((img) => {
     if (img.dataset.fallbackBound === "true") return;
@@ -110,12 +104,11 @@ function renderSchedule() {
   if (!schedule) return;
 
   schedule.innerHTML = COLLECTIONS.map((item) => `
-    <a class="schedule-row" href="booking.html?story=${item.slug}" aria-label="View booking details for ${item.name}">
+    <a class="schedule-row" href="booking.html?story=${item.slug}" aria-label="Book ${item.name}">
       <time>${item.date}</time>
       <strong>${item.name}</strong>
       <span class="schedule-time">${item.time}</span>
-      <span class="price">${currency.format(item.price)}</span>
-      <span class="schedule-action">Details →</span>
+      <span class="schedule-action">Book now →</span>
     </a>
   `).join("");
 }
@@ -131,7 +124,6 @@ function setBookingStory(item, updateUrl = false) {
   const think = document.querySelector("#booking-think");
   const date = document.querySelector("#booking-date");
   const time = document.querySelector("#booking-time");
-  const price = document.querySelector("#booking-price");
   const location = document.querySelector("#booking-location");
   const status = document.querySelector("#booking-status");
   const button = document.querySelector("#booking-button");
@@ -147,7 +139,6 @@ function setBookingStory(item, updateUrl = false) {
   if (think) think.innerHTML = `<strong>Think:</strong> ${item.think}`;
   if (date) date.textContent = item.date;
   if (time) time.textContent = item.time;
-  if (price) price.textContent = currency.format(item.price);
   if (location) location.textContent = item.location;
 
   if (visual && image && pending) {
@@ -175,10 +166,10 @@ function setBookingStory(item, updateUrl = false) {
   if (button && status) {
     if (item.bookingUrl) {
       button.href = item.bookingUrl;
-      button.textContent = `Continue to book ${item.name}`;
+      button.textContent = `Book ${item.name}`;
       button.classList.remove("is-disabled");
       button.setAttribute("aria-disabled", "false");
-      status.textContent = "Your reservation is secured once the required deposit is received within three days.";
+      status.textContent = "A deposit secures your reservation and is due within three days.";
     } else {
       button.href = "#";
       button.textContent = "Booking link coming soon";
