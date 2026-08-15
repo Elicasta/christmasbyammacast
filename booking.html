@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f3ec" />
+  <meta name="description" content="View dates, pricing, styling direction, and booking access for the 2026 EC Creative Studios Christmas collection." />
+  <title>Booking Details | Greetings From Christmas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="media.css" />
+  <script defer src="collections.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#booking-details">Skip to booking details</a>
+
+  <div class="preview-ribbon" role="note">
+    <span>Private client access</span>
+    <span aria-hidden="true">•</span>
+    <span>Public release September 1</span>
+  </div>
+
+  <header class="site-header" id="top">
+    <nav class="nav shell" aria-label="Primary navigation">
+      <a class="brand" href="index.html" aria-label="EC Creative Studios holiday collection home">
+        <img class="brand-logo" src="assets/ec-creative-logo.webp" alt="EC Creative Studios, established 2022" width="1064" height="500" />
+      </a>
+      <div class="nav-links">
+        <a href="index.html#stories">Collections</a>
+        <a href="index.html#dates">Dates</a>
+        <a href="booking.html" aria-current="page">Booking</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="booking-page" data-booking-page>
+    <section class="booking-page-shell shell" id="booking-details" aria-labelledby="booking-title">
+      <a class="back-link" href="index.html#stories">← Back to the collection</a>
+
+      <div class="booking-layout">
+        <figure class="booking-visual" id="booking-visual">
+          <img id="booking-image" src="assets/winter-cottage.webp" alt="Soft neutral Christmas cottage interior with a tree, fireplace, and natural winter layers" width="1536" height="1024" fetchpriority="high" decoding="async" />
+          <div class="booking-image-pending" id="booking-image-pending" hidden>
+            <span>Christmas Bound</span>
+            <strong>Photography coming soon</strong>
+          </div>
+        </figure>
+
+        <div class="booking-detail">
+          <p class="eyebrow">Booking details</p>
+          <h1 id="booking-title">The Winter Cottage</h1>
+          <p class="booking-feeling" id="booking-feeling">Soft · Intimate · Wintery · Timeless</p>
+          <p class="booking-description" id="booking-description">A quiet winter morning tucked away at the cottage. Soft whites, icy blues, natural wood, snowy trees, and candlelight create a peaceful Christmas setting made for connection and soft, lived-in moments.</p>
+          <p class="booking-think" id="booking-think"><strong>Think:</strong> Cream, ivory, pale blue, oatmeal, soft knits, linen, cashmere, and subtle winter layers.</p>
+
+          <dl class="booking-meta-grid">
+            <div>
+              <dt>Date</dt>
+              <dd id="booking-date">October 24</dd>
+            </div>
+            <div>
+              <dt>Time</dt>
+              <dd id="booking-time">11:30 AM to 2:30 PM</dd>
+            </div>
+            <div>
+              <dt>Investment</dt>
+              <dd id="booking-price">$595</dd>
+            </div>
+            <div>
+              <dt>Location</dt>
+              <dd id="booking-location">The Cottage · Indoors</dd>
+            </div>
+          </dl>
+
+          <div class="booking-control">
+            <label for="story-select">View a different Christmas story</label>
+            <select id="story-select" aria-describedby="booking-status">
+              <option value="the-winter-cottage">The Winter Cottage</option>
+            </select>
+          </div>
+
+          <p class="booking-status" id="booking-status">Your reservation is secured once the required deposit is received within three days.</p>
+          <a class="button button-primary booking-button" id="booking-button" href="https://ECCreativeStudio.pixieset.com/booking/The-Winter-Cottage" aria-disabled="false">Continue to book The Winter Cottage</a>
+          <p class="booking-external-note">You’ll continue to the secure EC Creative Studios booking page to choose an available time and complete the deposit.</p>
+
+          <noscript>
+            <p class="booking-status">JavaScript is required to switch collections here. Return to the collection page and use the direct booking link for your chosen story.</p>
+          </noscript>
+        </div>
+      </div>
+    </section>
+
+    <section class="details shell booking-process" aria-label="How booking works">
+      <article>
+        <span>01</span>
+        <h3>Choose</h3>
+        <p>Confirm the story, date, and styling direction that fit your family.</p>
+      </article>
+      <article>
+        <span>02</span>
+        <h3>Reserve</h3>
+        <p>Choose an available time and complete the required deposit within three days.</p>
+      </article>
+      <article>
+        <span>03</span>
+        <h3>Prepare</h3>
+        <p>Use the palette and wardrobe notes to pull the final look together.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <div class="footer-brand footer-ec">
+        <img src="assets/ec-creative-logo.webp" alt="EC Creative Studios" width="1064" height="500" loading="lazy" decoding="async" />
+      </div>
+      <p>Greetings From Christmas · The 2026 Holiday Collection</p>
+      <a href="index.html#stories">View all stories</a>
+    </div>
+  </footer>
+</body>
+</html>
+

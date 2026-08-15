@@ -12,8 +12,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="assets/winter-cottage.webp" fetchpriority="high" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="media.css" />
+  <script defer src="collections.js"></script>
   <script defer src="app.js"></script>
 </head>
 <body>
@@ -27,17 +29,13 @@
 
   <header class="site-header" id="top">
     <nav class="nav shell" aria-label="Primary navigation">
-      <a class="brand" href="#top" aria-label="Greetings From Christmas home">
-        <img class="brand-mark" src="assets/ec-mark.webp" alt="" width="28" height="40" />
-        <span class="brand-copy">
-          <span>Greetings From</span>
-          <strong>Christmas</strong>
-        </span>
+      <a class="brand" href="#top" aria-label="EC Creative Studios holiday collection home">
+        <img class="brand-logo" src="assets/ec-creative-logo.webp" alt="EC Creative Studios, established 2022" width="1064" height="500" />
       </a>
       <div class="nav-links">
         <a href="#stories">Collections</a>
         <a href="#dates">Dates</a>
-        <a href="#booking">Booking</a>
+        <a href="booking.html">Booking</a>
       </div>
     </nav>
   </header>
@@ -47,7 +45,6 @@
       <p class="eyebrow">The 2026 Holiday Collection</p>
       <h1 id="hero-title"><span>Greetings From</span><em>Christmas</em></h1>
       <div class="hero-byline">
-        <img src="assets/ec-mark.webp" alt="" width="24" height="34" />
         <span>By EC Creative Studios</span>
       </div>
       <p class="hero-intro">Nine distinct Christmas stories, each with its own palette, personality, and sense of nostalgia. Choose the one that feels most like your family, then make it your own.</p>
@@ -65,96 +62,136 @@
       <p>From quiet winter rooms to plaid in the pines, candlelit nostalgia, a vintage holiday drive, and Christmas on the South Florida coast. The settings change. The intention stays the same: photographs that feel like your family.</p>
     </section>
 
-    <section class="stories shell" id="stories" aria-label="Christmas session collection">
-      <article class="story" style="--accent:#b8c7cf">
+    <section class="collection shell" id="stories" aria-labelledby="stories-heading">
+      <div class="carousel-header">
+        <div>
+          <p class="eyebrow">Choose your story</p>
+          <h2 id="stories-heading">Nine ways to make Christmas yours.</h2>
+          <p class="swipe-hint">Swipe left or right to explore each setting.</p>
+        </div>
+        <div class="carousel-controls" aria-label="Collection carousel controls">
+          <button class="carousel-button" type="button" data-carousel-direction="-1" aria-label="Previous Christmas story">←</button>
+          <span class="carousel-count" id="carousel-count" aria-live="polite">01 / 09</span>
+          <button class="carousel-button" type="button" data-carousel-direction="1" aria-label="Next Christmas story">→</button>
+        </div>
+      </div>
+
+      <div class="stories" id="story-carousel" role="region" aria-roledescription="carousel" aria-label="Christmas session collection" tabindex="0">
+      <article class="story" role="group" aria-roledescription="slide" aria-label="1 of 9: The Winter Cottage" style="--accent:#b8c7cf">
+        <figure class="story-media">
+          <img src="assets/winter-cottage.webp" alt="Soft neutral Christmas cottage interior with a tree, fireplace, and natural winter layers" width="1536" height="1024" fetchpriority="high" decoding="async" />
+        </figure>
         <div class="story-topline"><span>01</span><span>The Cottage</span></div>
         <h3>The Winter Cottage</h3>
         <p class="story-feeling">Soft · Intimate · Wintery · Timeless</p>
         <p class="story-description">A quiet winter morning tucked away at the cottage. Soft whites, icy blues, natural wood, snowy trees, and candlelight create a peaceful Christmas setting made for connection and soft, lived-in moments.</p>
         <p class="story-think"><strong>Think:</strong> Cream, ivory, pale blue, oatmeal, soft knits, linen, cashmere, and subtle winter layers.</p>
         <div class="story-logistics"><span>Oct 24</span><span>11:30 AM to 2:30 PM</span><span>$595</span></div>
-        <a class="text-link" href="#booking" data-select-story="The Winter Cottage">View booking details</a>
+        <a class="text-link" href="booking.html?story=the-winter-cottage">View booking details</a>
       </article>
 
-      <article class="story" style="--accent:#485b45">
+      <article class="story" role="group" aria-roledescription="slide" aria-label="2 of 9: Pine and Plaid" style="--accent:#485b45">
+        <figure class="story-media">
+          <img src="assets/pine-plaid.webp" alt="Outdoor Christmas tree with plaid details, wrapped gifts, and evergreens" width="1672" height="941" loading="lazy" decoding="async" />
+        </figure>
         <div class="story-topline"><span>02</span><span>The Cottage · Outdoors</span></div>
         <h3>Pine + Plaid</h3>
         <p class="story-feeling">Nostalgic · Playful · Woodsy · Classic</p>
         <p class="story-description">Christmas heads outdoors with evergreens, tartan, layered knits, wrapped gifts, and the easy energy of a classic holiday catalog. Less standing still. More decorating, laughing, moving, and being together.</p>
         <p class="story-think"><strong>Think:</strong> Plaid, denim, forest green, navy, red, camel, corduroy, wool sweaters, boots, and layered outerwear.</p>
         <div class="story-logistics"><span>Oct 24</span><span>2:30 PM to 5:00 PM</span><span>$650</span></div>
-        <a class="text-link" href="#booking" data-select-story="Pine + Plaid">View booking details</a>
+        <a class="text-link" href="booking.html?story=pine-plaid">View booking details</a>
       </article>
 
-      <article class="story" style="--accent:#7d2027">
+      <article class="story" role="group" aria-roledescription="slide" aria-label="3 of 9: A Crimson Christmas" style="--accent:#7d2027">
+        <figure class="story-media">
+          <img src="assets/crimson-christmas.webp" alt="Deep crimson and evergreen traditional Christmas room glowing with candlelight" width="1672" height="941" loading="lazy" decoding="async" />
+        </figure>
         <div class="story-topline"><span>03</span><span>Mint Studios</span></div>
         <h3>A Crimson Christmas</h3>
         <p class="story-feeling">Rich · Traditional · Romantic · Grand</p>
         <p class="story-description">Deep crimson, evergreen, candlelight, velvet bows, and all the richness of a traditional Christmas dressed up for the occasion. Classic holiday color made dramatic, warm, and timeless.</p>
         <p class="story-think"><strong>Think:</strong> Burgundy, deep red, black, evergreen, cream, velvet, tartan, and holiday dresswear.</p>
         <div class="story-logistics"><span>Nov 7</span><span>11:00 AM to 4:30 PM</span><span>$595</span></div>
-        <a class="text-link" href="#booking" data-select-story="A Crimson Christmas">View booking details</a>
+        <a class="text-link" href="booking.html?story=a-crimson-christmas">View booking details</a>
       </article>
 
-      <article class="story" style="--accent:#9b7580">
+      <article class="story" role="group" aria-roledescription="slide" aria-label="4 of 9: Velvet December" style="--accent:#9b7580">
+        <figure class="story-media">
+          <img src="assets/velvet-december.webp" alt="Soft mauve and dusty blue Christmas living room with restrained vintage details" width="1672" height="941" loading="lazy" decoding="async" />
+        </figure>
         <div class="story-topline"><span>04</span><span>Mint Studios</span></div>
         <h3>Velvet December</h3>
         <p class="story-feeling">Romantic · Artistic · Vintage · Soft</p>
         <p class="story-description">A softer take on Christmas, filled with dusty rose, muted blue, antique gold, velvet ribbon, and collected details. It feels like opening a box of Christmas treasures that has been kept for years.</p>
         <p class="story-think"><strong>Think:</strong> Mauve, dusty blue, cream, velvet, satin, delicate patterns, and antique-inspired pieces.</p>
         <div class="story-logistics"><span>Nov 8</span><span>2:00 PM to 4:30 PM</span><span>$595</span></div>
-        <a class="text-link" href="#booking" data-select-story="Velvet December">View booking details</a>
+        <a class="text-link" href="booking.html?story=velvet-december">View booking details</a>
       </article>
 
-      <article class="story" style="--accent:#6f594c">
+      <article class="story" role="group" aria-roledescription="slide" aria-label="5 of 9: Little Women" style="--accent:#6f594c">
+        <figure class="story-media">
+          <img src="assets/little-women.webp" alt="Warm old-fashioned Christmas fireside room with stockings, plaid, and handmade details" width="1672" height="941" loading="lazy" decoding="async" />
+        </figure>
         <div class="story-topline"><span>05</span><span>Special Edition</span></div>
         <h3>Little Women</h3>
         <p class="story-feeling">Romantic · Literary · Nostalgic · Intimate</p>
         <p class="story-description">Inspired by the warmth and romance of Christmases from another time, Little Women is quiet, sentimental, and beautifully old-fashioned. Think simple traditions, soft fabrics, candlelight, handwritten letters, ribbons, and the kind of Christmas that feels handmade rather than decorated.</p>
         <p class="story-think"><strong>Think:</strong> Cream, faded florals, burgundy, forest green, lace, linen, wool, ribbons, vintage silhouettes, and heirloom-inspired pieces.</p>
         <div class="story-logistics"><span>Nov 14</span><span>1:00 PM to 3:00 PM</span><span>$650</span></div>
-        <a class="text-link" href="#booking" data-select-story="Little Women">View booking details</a>
+        <a class="text-link" href="booking.html?story=little-women">View booking details</a>
       </article>
 
-      <article class="story" style="--accent:#8f3030">
+      <article class="story" role="group" aria-roledescription="slide" aria-label="6 of 9: Christmas Bound" style="--accent:#8f3030">
         <div class="story-topline"><span>06</span><span>Vintage Car · Limited Edition</span></div>
         <h3>Christmas Bound</h3>
         <p class="story-feeling">Cinematic · Adventurous · Nostalgic · Cool</p>
         <p class="story-description">Pack the presents, grab the tree, and pile into the car. Christmas Bound turns the holiday road trip into a vintage editorial, filled with evergreen, layered winter styling, and the feeling that somewhere wonderful is waiting ahead.</p>
         <p class="story-think"><strong>Think:</strong> Tartan, denim, corduroy, wool coats, sweaters, loafers, boots, and lived-in layers.</p>
         <div class="story-logistics"><span>Nov 15</span><span>3:00 PM to 5:00 PM</span><span>$650</span><span>4 sessions</span></div>
-        <a class="text-link" href="#booking" data-select-story="Christmas Bound">View booking details</a>
+        <a class="text-link" href="booking.html?story=christmas-bound">View booking details</a>
       </article>
 
-      <article class="story" style="--accent:#74513f">
+      <article class="story" role="group" aria-roledescription="slide" aria-label="7 of 9: Chestnut Christmas" style="--accent:#74513f">
+        <figure class="story-media">
+          <img src="assets/chestnut-christmas.webp" alt="Warm chestnut brown and cream Christmas living room with classic greenery" width="1672" height="941" loading="lazy" decoding="async" />
+        </figure>
         <div class="story-topline"><span>07</span><span>Mint Studios</span></div>
         <h3>Chestnut Christmas</h3>
         <p class="story-feeling">Warm · Heritage · Classic · Cozy</p>
         <p class="story-description">Warm chestnut tones, traditional greenery, rich plaids, natural textures, and a beautifully lived-in feeling. Relaxed and polished at once, with the warmth of a classic holiday campaign.</p>
         <p class="story-think"><strong>Think:</strong> Chocolate, camel, cream, forest green, tartan, wool, corduroy, loafers, and knits.</p>
         <div class="story-logistics"><span>Nov 21</span><span>11:00 AM to 4:30 PM</span><span>$595</span></div>
-        <a class="text-link" href="#booking" data-select-story="Chestnut Christmas">View booking details</a>
+        <a class="text-link" href="booking.html?story=chestnut-christmas">View booking details</a>
       </article>
 
-      <article class="story" style="--accent:#c5b996">
+      <article class="story" role="group" aria-roledescription="slide" aria-label="8 of 9: The Winter Carousel" style="--accent:#c5b996">
+        <figure class="story-media">
+          <img src="assets/winter-carousel.webp" alt="White and gold winter carousel surrounded by frosted Christmas trees" width="1672" height="941" loading="lazy" decoding="async" />
+        </figure>
         <div class="story-topline"><span>08</span><span>Mint Studios</span></div>
         <h3>The Winter Carousel</h3>
         <p class="story-feeling">Dreamy · Whimsical · Elegant · Magical</p>
         <p class="story-description">Frosted trees, winter whites, soft gold, and an old-fashioned carousel create a Christmas dream that feels magical without becoming overly sweet. A little world made for childhood wonder.</p>
         <p class="story-think"><strong>Think:</strong> Ivory, winter white, soft neutrals, delicate textures, and timeless children’s clothing.</p>
         <div class="story-logistics"><span>Nov 22</span><span>1:30 PM to 3:30 PM</span><span>$595</span></div>
-        <a class="text-link" href="#booking" data-select-story="The Winter Carousel">View booking details</a>
+        <a class="text-link" href="booking.html?story=the-winter-carousel">View booking details</a>
       </article>
 
-      <article class="story story-wide" style="--accent:#819189">
+      <article class="story" role="group" aria-roledescription="slide" aria-label="9 of 9: Salt and Pine" style="--accent:#819189">
+        <figure class="story-media">
+          <img src="assets/salt-pine.webp" alt="South Florida Christmas courtyard with palms, warm light, and a softly decorated tree" width="1672" height="941" loading="lazy" decoding="async" />
+        </figure>
         <div class="story-topline"><span>09</span><span>South Florida · Outdoors</span></div>
         <h3>Salt + Pine</h3>
         <p class="story-feeling">Coastal · Warm · Relaxed · Nostalgic · Natural</p>
         <p class="story-description">A Christmas story made for Miami. Salt + Pine brings the warmth of the holidays outdoors with soft sand, natural pine, warm ivory tones, woven textures, and the glow of late afternoon light. It feels relaxed and coastal without becoming beachy, giving you the nostalgia of Christmas at home with a distinctly South Florida point of view. Bare feet, soft layers, little ones gathered around the tree, and genuine family moments make this one feel effortless, intimate, and timeless.</p>
         <p class="story-think"><strong>Think:</strong> Cream, oatmeal, sage, dusty blue, sand, linen, soft knits, natural textures, and understated holiday details.</p>
         <div class="story-logistics"><span>Nov 28</span><span>3:00 PM to 5:00 PM</span><span>$650</span></div>
-        <a class="text-link" href="#booking" data-select-story="Salt + Pine">View booking details</a>
+        <a class="text-link" href="booking.html?story=salt-pine">View booking details</a>
       </article>
+      </div>
+      <p class="collection-disclaimer" role="note"><strong>Visual note:</strong> The images shown are for inspiration and to convey the feeling of each collection. While we do our best to closely match the featured aesthetic, final sets, styling, lighting, and details may vary.</p>
     </section>
 
     <section class="schedule" id="dates" aria-labelledby="schedule-heading">
@@ -164,24 +201,7 @@
           <h2 id="schedule-heading">The Holiday Calendar</h2>
         </div>
         <div class="schedule-list" id="schedule-list"></div>
-        <p class="schedule-note">October 24 includes The Winter Cottage indoors and Pine + Plaid outdoors. There are 11 total reservations across the Cottage day.</p>
-      </div>
-    </section>
-
-    <section class="booking shell" id="booking" aria-labelledby="booking-heading">
-      <div class="booking-card">
-        <div class="booking-copy">
-          <p class="eyebrow">Private client access</p>
-          <h2 id="booking-heading">Reserve your Christmas story.</h2>
-          <p>Choose your collection and preferred available time. Your reservation is held for three days while your deposit is completed. If the deposit is not received within that window, the reservation is released.</p>
-        </div>
-        <div class="booking-panel">
-          <label for="story-select">Choose your collection</label>
-          <select id="story-select" aria-describedby="booking-status"></select>
-          <div class="selected-story" id="selected-story"></div>
-          <p class="booking-status" id="booking-status">Select a collection to view its session details.</p>
-          <a class="button button-primary is-disabled" id="booking-button" href="#" aria-disabled="true">Booking link coming soon</a>
-        </div>
+        <p class="schedule-note">Tap any collection to view its booking details. October 24 includes The Winter Cottage indoors and Pine + Plaid outdoors, with 11 total reservations across the Cottage day.</p>
       </div>
     </section>
 
@@ -207,8 +227,7 @@
   <footer>
     <div class="shell footer-inner">
       <div class="footer-brand footer-ec">
-        <img src="assets/ec-mark.webp" alt="EC Creative Studios" width="34" height="48" />
-        <span>EC Creative Studios</span>
+        <img src="assets/ec-creative-logo.webp" alt="EC Creative Studios" width="1064" height="500" loading="lazy" decoding="async" />
       </div>
       <p>Greetings From Christmas · The 2026 Holiday Collection</p>
       <a href="#top">Back to top ↑</a>
