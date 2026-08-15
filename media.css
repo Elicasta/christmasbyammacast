@@ -2,48 +2,46 @@
   --story-pad: clamp(2rem, 4vw, 4rem);
 }
 
-.hero-byline img {
-  display: none;
+.hero-byline {
+  gap: .75rem;
 }
 
-.hero-byline {
-  gap: 0;
+.hero-byline img {
+  display: block;
 }
 
 .story-media {
   margin: calc(var(--story-pad) * -1) calc(var(--story-pad) * -1) 2.4rem;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 8 / 5;
   overflow: hidden;
-  background: var(--paper-warm, #efe8dc);
+  background-color: var(--paper-warm, #efe8dc);
+  background-repeat: no-repeat;
+  background-size: 300% 300%;
   border-bottom: 1px solid var(--line, rgba(34, 42, 35, 0.14));
-}
-
-.story-media img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  transition: transform 420ms ease;
-}
-
-.story:hover .story-media img {
-  transform: scale(1.012);
+  transform: translateZ(0);
 }
 
 .story-wide .story-media {
-  aspect-ratio: 21 / 9;
+  aspect-ratio: 8 / 5;
 }
 
-.story:nth-of-type(1) .story-media img { object-position: center 38%; }
-.story:nth-of-type(2) .story-media img { object-position: center 52%; }
-.story:nth-of-type(3) .story-media img { object-position: center 48%; }
-.story:nth-of-type(4) .story-media img { object-position: center 50%; }
-.story:nth-of-type(5) .story-media img { object-position: center 50%; }
-.story:nth-of-type(6) .story-media img { object-position: center 54%; }
-.story:nth-of-type(7) .story-media img { object-position: center 50%; }
-.story:nth-of-type(8) .story-media img { object-position: center 50%; }
-.story:nth-of-type(9) .story-media img { object-position: center 48%; }
+.ec-oval-mark {
+  display: block;
+  width: 76px;
+  height: 38px;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+.hero-byline .ec-oval-mark {
+  width: 86px;
+  height: 42px;
+}
+
+.footer-ec .ec-oval-mark {
+  width: 92px;
+  height: 44px;
+}
 
 @media (max-width: 680px) {
   .story.has-photo {
@@ -52,17 +50,33 @@
 
   .story-media {
     margin-bottom: 1.8rem;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 8 / 5;
   }
 
   .story-wide .story-media {
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 8 / 5;
   }
 
-  .story:nth-of-type(1) .story-media img { object-position: center 35%; }
-}
+  .brand .ec-oval-mark {
+    width: 58px;
+    height: 30px;
+  }
 
-@media (prefers-reduced-motion: reduce) {
-  .story-media img { transition: none; }
-  .story:hover .story-media img { transform: none; }
+  .hero-byline .ec-oval-mark {
+    width: 72px;
+    height: 36px;
+  }
+
+  .footer-ec .ec-oval-mark {
+    width: 78px;
+    height: 38px;
+  }
+
+  .hero h1 > em {
+    margin-top: .16em;
+  }
+
+  .collection-intro {
+    padding-top: 4.25rem;
+  }
 }
