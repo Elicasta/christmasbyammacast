@@ -218,8 +218,43 @@ function updatePreviewRibbon() {
   }
 }
 
+function setupMobileMenus() {
+  const menus = [...document.querySelectorAll(".mobile-menu")];
+  if (!menus.length) return;
+
+  menus.forEach((menu) => {
+    const summary = menu.querySelector("summary");
+    const updateLabel = () => {
+      summary?.setAttribute("aria-label", menu.open ? "Close navigation menu" : "Open navigation menu");
+    };
+
+    menu.addEventListener("toggle", updateLabel);
+    updateLabel();
+
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => menu.removeAttribute("open"));
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    menus.forEach((menu) => {
+      if (menu.open && !menu.contains(event.target)) menu.removeAttribute("open");
+    });
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    menus.forEach((menu) => {
+      if (!menu.open) return;
+      menu.removeAttribute("open");
+      menu.querySelector("summary")?.focus();
+    });
+  });
+}
+
 bindImageFallbacks();
 setupStoryCarousel();
 renderSchedule();
 setupBookingPage();
 updatePreviewRibbon();
+setupMobileMenus();

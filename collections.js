@@ -129,7 +129,7 @@ window.HOLIDAY_COLLECTIONS = Object.freeze([
     time: "3:00 PM to 5:00 PM",
     location: "Outdoor Coastal Story",
     feeling: "Coastal · Warm · Relaxed · Nostalgic · Natural",
-    description: "A Christmas story made for Miami. Salt + Pine brings the warmth of the holidays outdoors with soft sand, natural pine, warm ivory tones, woven textures, and the glow of late afternoon light. It feels relaxed and coastal without becoming beachy, giving you the nostalgia of Christmas at home with a distinctly South Florida point of view.",
+    description: "A Christmas story made for Miami. Salt + Pine brings the warmth of the holidays outdoors with soft sand, natural pine, warm ivory tones, woven textures, and the glow of late afternoon light. It feels relaxed and coastal without becoming beachy, giving you the nostalgia of Christmas at home with a distinctly South Florida point of view. Bare feet, soft layers, little ones gathered around the tree, and genuine family moments make this one feel effortless, intimate, and timeless.",
     think: "Cream, oatmeal, sage, dusty blue, sand, linen, soft knits, natural textures, and understated holiday details.",
     accent: "#819189",
     image: "assets/salt-pine.webp",
