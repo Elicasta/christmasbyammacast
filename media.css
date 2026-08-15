@@ -2,6 +2,14 @@
   --story-pad: clamp(2rem, 4vw, 4rem);
 }
 
+.hero-byline img {
+  display: none;
+}
+
+.hero-byline {
+  gap: 0;
+}
+
 .story-media {
   margin: calc(var(--story-pad) * -1) calc(var(--story-pad) * -1) 2.4rem;
   aspect-ratio: 16 / 10;
