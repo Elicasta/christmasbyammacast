@@ -158,6 +158,7 @@ function setBookingStory(item, updateUrl = false) {
       image.hidden = false;
       image.src = item.image;
       image.alt = item.imageAlt;
+      image.style.objectPosition = item.imagePosition || "center";
       image.dataset.fallbackBound = "false";
       pending.hidden = true;
       bindImageFallbacks(visual);
@@ -165,6 +166,7 @@ function setBookingStory(item, updateUrl = false) {
       image.hidden = true;
       image.removeAttribute("src");
       image.alt = "";
+      image.style.objectPosition = "center";
       pending.hidden = false;
       visual.classList.add("is-pending");
     }

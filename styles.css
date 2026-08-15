@@ -66,21 +66,24 @@ button, select { font: inherit; }
 }
 
 .nav {
-  min-height: 112px;
+  position: relative;
+  min-height: 86px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 2rem;
 }
 
 .brand {
+  position: absolute;
+  left: 50%;
   display: inline-flex;
   align-items: center;
-  flex: 0 1 auto;
+  transform: translateX(-50%);
   text-decoration: none;
 }
 .brand-logo {
-  width: clamp(180px, 18vw, 220px);
+  width: clamp(132px, 13vw, 154px);
   height: auto;
   object-fit: contain;
   flex: 0 0 auto;
@@ -89,6 +92,7 @@ button, select { font: inherit; }
 .nav-links {
   display: flex;
   gap: 1.7rem;
+  margin-left: auto;
 }
 .nav-links a {
   text-decoration: none;
@@ -100,7 +104,7 @@ button, select { font: inherit; }
 .nav-links a:hover { color: var(--red); }
 
 .hero {
-  padding-block: clamp(5rem, 10vw, 8.5rem);
+  padding-block: clamp(3.5rem, 7vw, 6rem);
   max-width: 1100px;
 }
 .eyebrow {
@@ -114,7 +118,7 @@ button, select { font: inherit; }
 .hero h1 {
   max-width: 1000px;
   margin: 0;
-  font: 600 clamp(4.5rem, 10vw, 9.2rem)/.88 var(--serif);
+  font: 600 clamp(4.3rem, 9vw, 8.4rem)/.88 var(--serif);
   letter-spacing: -.045em;
 }
 .hero h1 > span,
@@ -134,7 +138,7 @@ button, select { font: inherit; }
   display: flex;
   align-items: center;
   gap: 0;
-  margin-top: 1.65rem;
+  margin-top: 1.25rem;
   color: var(--green);
   font-size: .67rem;
   font-weight: 600;
@@ -143,7 +147,7 @@ button, select { font: inherit; }
 }
 .hero-intro {
   max-width: 720px;
-  margin: 2rem 0 1.5rem;
+  margin: 1.5rem 0 1.2rem;
   color: #4e554f;
   font: 500 clamp(1.15rem, 2vw, 1.45rem)/1.5 var(--serif);
 }
@@ -151,7 +155,7 @@ button, select { font: inherit; }
   display: flex;
   flex-wrap: wrap;
   gap: .55rem 1.2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   color: var(--muted);
   font-size: .72rem;
   font-weight: 600;
@@ -191,39 +195,24 @@ button, select { font: inherit; }
   pointer-events: none;
 }
 
-.collection-intro {
-  display: grid;
-  grid-template-columns: .65fr 1.35fr;
-  gap: clamp(2rem, 6vw, 7rem);
-  align-items: start;
-  padding: 6rem 0 3rem;
-  border-top: 1px solid var(--line);
-}
-.collection-intro .eyebrow { margin-top: .45rem; }
-.collection-intro h2,
 .section-heading h2,
-.booking h2 {
+.booking h2,
+.book-christmas-heading h2 {
   margin: 0;
   font: 600 clamp(2.8rem, 5.5vw, 5.2rem)/1.02 var(--serif);
   letter-spacing: -.035em;
 }
-.collection-intro > p:last-child {
-  grid-column: 2;
-  max-width: 730px;
-  margin: 1.2rem 0 0;
-  color: #555c56;
-  font: 500 1.12rem/1.55 var(--serif);
-}
 
 .collection {
-  padding: 2rem 0 7rem;
+  padding: clamp(3rem, 6vw, 5rem) 0 5.5rem;
+  border-top: 1px solid var(--line);
 }
 .carousel-header {
   display: flex;
   align-items: end;
   justify-content: space-between;
   gap: 2rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 .carousel-header .eyebrow { margin-bottom: .65rem; }
 .carousel-header h2 {
@@ -283,7 +272,7 @@ button, select { font: inherit; }
   background: var(--line);
   border: 1px solid var(--line);
   scroll-behavior: smooth;
-  scroll-snap-type: inline mandatory;
+  scroll-snap-type: x mandatory;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
 }
@@ -306,7 +295,7 @@ button, select { font: inherit; }
 .story {
   --story-pad: clamp(2rem, 4vw, 4rem);
   position: relative;
-  flex: 0 0 clamp(360px, 46vw, 560px);
+  flex: 0 0 clamp(360px, 44vw, 520px);
   min-width: 0;
   padding: var(--story-pad);
   background: var(--white);
@@ -519,6 +508,34 @@ button, select { font: inherit; }
   font-size: .9rem;
 }
 
+.book-christmas {
+  padding: 5.5rem 0 6rem;
+  background: var(--paper-warm);
+  border-top: 1px solid var(--line);
+}
+.book-christmas-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem;
+  align-items: end;
+  margin-bottom: 1.5rem;
+}
+.book-christmas-heading h2 {
+  color: var(--green);
+}
+.book-christmas-heading p:last-child {
+  max-width: 610px;
+  margin: .9rem 0 0;
+  color: var(--muted);
+  font: 500 1.05rem/1.5 var(--serif);
+}
+.book-christmas-heading .button {
+  min-width: 220px;
+}
+.book-christmas .details {
+  margin-bottom: 0;
+}
+
 .booking-page {
   --accent: #b8c7cf;
 }
@@ -701,11 +718,6 @@ footer {
 .footer-inner a { text-underline-offset: 4px; }
 
 @media (max-width: 900px) {
-  .collection-intro {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  .collection-intro > p:last-child { grid-column: 1; }
   .booking-card { grid-template-columns: 1fr; }
   .booking-layout { grid-template-columns: 1fr; }
   .booking-visual {
@@ -733,23 +745,23 @@ footer {
     letter-spacing: .11em;
   }
   .nav {
-    min-height: 92px;
+    min-height: 76px;
     gap: .85rem;
   }
   .brand-logo {
-    width: 158px;
+    width: 118px;
   }
   .nav-links { gap: 1rem; }
   .nav-links a { font-size: .61rem; }
   .nav-links a:first-child { display: none; }
 
   .hero {
-    padding-top: 3.8rem;
-    padding-bottom: 4.5rem;
+    padding-top: 2.6rem;
+    padding-bottom: 3.25rem;
   }
-  .hero .eyebrow { margin-bottom: 1.35rem; }
+  .hero .eyebrow { margin-bottom: 1rem; }
   .hero h1 {
-    font-size: clamp(3.9rem, 18vw, 5.35rem);
+    font-size: clamp(3.55rem, 16.5vw, 4.9rem);
     line-height: .9;
     letter-spacing: -.042em;
   }
@@ -760,12 +772,12 @@ footer {
     margin-top: .12em;
   }
   .hero-byline {
-    margin-top: 1.4rem;
+    margin-top: 1.05rem;
     font-size: .61rem;
   }
   .hero-intro {
-    margin-top: 1.65rem;
-    font-size: 1.08rem;
+    margin-top: 1.25rem;
+    font-size: 1.03rem;
     line-height: 1.5;
   }
   .hero-meta {
@@ -774,27 +786,19 @@ footer {
   }
   .hero-meta span:not(:last-child)::after { display: none; }
 
-  .collection-intro {
-    padding-top: 4.25rem;
-    padding-bottom: 2.5rem;
-  }
-  .collection-intro h2,
   .section-heading h2,
   .booking h2 {
     line-height: 1.02;
   }
-  .collection-intro > p:last-child {
-    margin-top: .85rem;
-  }
 
   .collection {
-    padding-top: 1rem;
-    padding-bottom: 5rem;
+    padding-top: 2.75rem;
+    padding-bottom: 4rem;
   }
   .carousel-header {
     display: grid;
     align-items: start;
-    gap: 1.25rem;
+    gap: .9rem;
   }
   .carousel-header h2 {
     font-size: clamp(2.6rem, 12vw, 3.5rem);
@@ -802,21 +806,25 @@ footer {
   .carousel-controls {
     justify-content: space-between;
   }
+  .carousel-button {
+    width: 44px;
+    height: 44px;
+  }
   .stories {
     width: 100%;
   }
   .story {
-    --story-pad: 1.5rem;
-    flex-basis: calc(100vw - 56px);
+    --story-pad: 1.25rem;
+    flex-basis: calc(100vw - 44px);
     padding: var(--story-pad);
   }
-  .story-topline { margin-bottom: 1.7rem; }
+  .story-topline { margin-bottom: 1.4rem; }
   .story h3 {
     font-size: clamp(2.55rem, 12vw, 3.4rem);
     line-height: .98;
   }
 
-  .schedule { padding: 5rem 0; }
+  .schedule { padding: 4.25rem 0; }
   .schedule-row {
     grid-template-columns: 1fr auto;
     gap: .4rem 1rem;
@@ -860,6 +868,20 @@ footer {
     text-align: center;
   }
   .booking-process { padding-bottom: 5rem; }
+  .book-christmas {
+    padding: 4rem 0;
+  }
+  .book-christmas-heading {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .book-christmas-heading .button {
+    width: 100%;
+    min-width: 0;
+  }
+  .book-christmas .details {
+    margin-bottom: 0;
+  }
   .details {
     grid-template-columns: 1fr;
     margin-bottom: 5rem;
@@ -872,4 +894,13 @@ footer {
     gap: .65rem;
   }
   .footer-inner p { margin: 0; }
+}
+
+@media (max-width: 360px) {
+  .brand-logo { width: 86px; }
+  .nav-links { gap: .55rem; }
+  .nav-links a {
+    font-size: .56rem;
+    letter-spacing: .08em;
+  }
 }

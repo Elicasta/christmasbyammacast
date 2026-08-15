@@ -91,8 +91,9 @@ window.HOLIDAY_COLLECTIONS = Object.freeze([
     description: "Pack the presents, grab the tree, and pile into the car. Christmas Bound turns the holiday road trip into a vintage editorial, filled with evergreen, layered winter styling, and the feeling that somewhere wonderful is waiting ahead.",
     think: "Tartan, denim, corduroy, wool coats, sweaters, loafers, boots, and lived-in layers.",
     accent: "#8f3030",
-    image: "",
-    imageAlt: "",
+    image: "assets/christmas-bound.webp",
+    imageAlt: "Vintage red convertible filled with wrapped Christmas gifts, wreaths, and evergreen trees",
+    imagePosition: "center 62%",
     bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/Christmas-Bound"
   },
   {
@@ -141,7 +142,6 @@ window.HOLIDAY_COLLECTIONS = Object.freeze([
     accent: "#819189",
     image: "assets/salt-pine.webp",
     imageAlt: "South Florida Christmas courtyard with palms, warm light, and a softly decorated tree",
-    bookingUrl: ""
+    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/Salt-Pine"
   }
 ].map(Object.freeze));
-
