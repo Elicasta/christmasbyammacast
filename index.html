@@ -4,15 +4,16 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#f7f3ec" />
-  <meta name="description" content="Greetings From Christmas, the 2026 Emma Cast Holiday Collection. Nine Christmas stories available in limited sessions from October 24 through November 28." />
+  <meta name="description" content="Greetings From Christmas, the 2026 EC Creative Studios Holiday Collection. Nine Christmas stories available in limited sessions from October 24 through November 28." />
   <meta property="og:title" content="Greetings From Christmas | 2026 Holiday Collection" />
-  <meta property="og:description" content="Nine Christmas stories. One season worth remembering." />
+  <meta property="og:description" content="Nine Christmas stories. One season worth remembering. By EC Creative Studios." />
   <meta property="og:type" content="website" />
-  <title>Greetings From Christmas | 2026 Holiday Collection</title>
+  <title>Greetings From Christmas | EC Creative Studios</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="media.css" />
   <script defer src="app.js"></script>
 </head>
 <body>
@@ -27,8 +28,11 @@
   <header class="site-header" id="top">
     <nav class="nav shell" aria-label="Primary navigation">
       <a class="brand" href="#top" aria-label="Greetings From Christmas home">
-        <span>Greetings From</span>
-        <strong>Christmas</strong>
+        <img class="brand-mark" src="assets/ec-mark.webp" alt="" width="28" height="40" />
+        <span class="brand-copy">
+          <span>Greetings From</span>
+          <strong>Christmas</strong>
+        </span>
       </a>
       <div class="nav-links">
         <a href="#stories">Collections</a>
@@ -41,7 +45,11 @@
   <main>
     <section class="hero shell" aria-labelledby="hero-title">
       <p class="eyebrow">The 2026 Holiday Collection</p>
-      <h1 id="hero-title">Greetings From <em>Christmas</em></h1>
+      <h1 id="hero-title"><span>Greetings From</span><em>Christmas</em></h1>
+      <div class="hero-byline">
+        <img src="assets/ec-mark.webp" alt="" width="24" height="34" />
+        <span>By EC Creative Studios</span>
+      </div>
       <p class="hero-intro">Nine distinct Christmas stories, each with its own palette, personality, and sense of nostalgia. Choose the one that feels most like your family, then make it your own.</p>
       <div class="hero-meta" aria-label="Collection details">
         <span>9 Christmas stories</span>
@@ -198,8 +206,11 @@
 
   <footer>
     <div class="shell footer-inner">
-      <div class="footer-brand"><span>Greetings From</span><strong>Christmas</strong></div>
-      <p>The 2026 Holiday Collection</p>
+      <div class="footer-brand footer-ec">
+        <img src="assets/ec-mark.webp" alt="EC Creative Studios" width="34" height="48" />
+        <span>EC Creative Studios</span>
+      </div>
+      <p>Greetings From Christmas · The 2026 Holiday Collection</p>
       <a href="#top">Back to top ↑</a>
     </div>
   </footer>
