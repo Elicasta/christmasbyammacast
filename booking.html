@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#f7f3ec" />
-  <meta name="description" content="View dates, pricing, styling direction, and booking access for the 2026 EC Creative Studios Christmas collection." />
+  <meta name="description" content="View dates, styling direction, and booking access for the 2026 EC Creative Studios Christmas collection." />
   <title>Booking Details | Greetings From Christmas</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,7 +14,7 @@
   <script defer src="collections.js"></script>
   <script defer src="app.js"></script>
 </head>
-<body>
+<body class="booking-body">
   <a class="skip-link" href="#booking-details">Skip to booking details</a>
 
   <div class="preview-ribbon" role="note">
@@ -42,7 +42,7 @@
 
       <div class="booking-layout">
         <figure class="booking-visual" id="booking-visual">
-          <img id="booking-image" src="assets/winter-cottage.webp" alt="Soft neutral Christmas cottage interior with a tree, fireplace, and natural winter layers" width="1536" height="1024" fetchpriority="high" decoding="async" />
+          <img id="booking-image" src="assets/winter-cottage.webp" alt="Pale blue and white Christmas cottage living room with a chandelier, frosted tree, and soft neutral furnishings" width="1320" height="1589" fetchpriority="high" decoding="async" />
           <div class="booking-image-pending" id="booking-image-pending" hidden>
             <span>Christmas Bound</span>
             <strong>Photography coming soon</strong>
@@ -53,9 +53,6 @@
           <p class="eyebrow">Booking details</p>
           <h1 id="booking-title">The Winter Cottage</h1>
           <p class="booking-feeling" id="booking-feeling">Soft · Intimate · Wintery · Timeless</p>
-          <p class="booking-description" id="booking-description">A quiet winter morning tucked away at the cottage. Soft whites, icy blues, natural wood, snowy trees, and candlelight create a peaceful Christmas setting made for connection and soft, lived-in moments.</p>
-          <p class="booking-think" id="booking-think"><strong>Think:</strong> Cream, ivory, pale blue, oatmeal, soft knits, linen, cashmere, and subtle winter layers.</p>
-
           <dl class="booking-meta-grid">
             <div>
               <dt>Date</dt>
@@ -65,11 +62,7 @@
               <dt>Time</dt>
               <dd id="booking-time">11:30 AM to 2:30 PM</dd>
             </div>
-            <div>
-              <dt>Investment</dt>
-              <dd id="booking-price">$595</dd>
-            </div>
-            <div>
+            <div class="booking-meta-location">
               <dt>Location</dt>
               <dd id="booking-location">The Cottage · Indoors</dd>
             </div>
@@ -82,9 +75,14 @@
             </select>
           </div>
 
-          <p class="booking-status" id="booking-status">Your reservation is secured once the required deposit is received within three days.</p>
-          <a class="button button-primary booking-button" id="booking-button" href="https://ECCreativeStudio.pixieset.com/booking/The-Winter-Cottage" aria-disabled="false">Continue to book The Winter Cottage</a>
-          <p class="booking-external-note">You’ll continue to the secure EC Creative Studios booking page to choose an available time and complete the deposit.</p>
+          <p class="booking-status" id="booking-status">A deposit secures your reservation and is due within three days.</p>
+          <a class="button button-primary booking-button" id="booking-button" href="https://ECCreativeStudio.pixieset.com/booking/The-Winter-Cottage" aria-disabled="false">Book The Winter Cottage</a>
+          <p class="booking-external-note">Opens the secure EC Creative Studios booking page to choose a time and complete your deposit.</p>
+
+          <div class="booking-story-notes">
+            <p class="booking-description" id="booking-description">A quiet winter morning tucked away at the cottage. Soft whites, icy blues, natural wood, snowy trees, and candlelight create a peaceful Christmas setting made for connection and soft, lived-in moments.</p>
+            <p class="booking-think" id="booking-think"><strong>Think:</strong> Cream, ivory, pale blue, oatmeal, soft knits, linen, cashmere, and subtle winter layers.</p>
+          </div>
 
           <noscript>
             <p class="booking-status">JavaScript is required to switch collections here. Return to the collection page and use the direct booking link for your chosen story.</p>
@@ -93,23 +91,6 @@
       </div>
     </section>
 
-    <section class="details shell booking-process" aria-label="How booking works">
-      <article>
-        <span>01</span>
-        <h3>Choose</h3>
-        <p>Confirm the story, date, and styling direction that fit your family.</p>
-      </article>
-      <article>
-        <span>02</span>
-        <h3>Reserve</h3>
-        <p>Choose an available time and complete the required deposit within three days.</p>
-      </article>
-      <article>
-        <span>03</span>
-        <h3>Prepare</h3>
-        <p>Use the palette and wardrobe notes to pull the final look together.</p>
-      </article>
-    </section>
   </main>
 
   <footer>
@@ -123,4 +104,3 @@
   </footer>
 </body>
 </html>
-
