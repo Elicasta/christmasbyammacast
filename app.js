@@ -4,6 +4,7 @@ const COLLECTIONS = [
     date: "October 24",
     time: "11:30 AM to 2:30 PM",
     price: 595,
+    location: "The Cottage · Indoors",
     bookingUrl: ""
   },
   {
@@ -11,6 +12,7 @@ const COLLECTIONS = [
     date: "October 24",
     time: "2:30 PM to 5:00 PM",
     price: 650,
+    location: "The Cottage · Outdoors",
     bookingUrl: ""
   },
   {
@@ -18,6 +20,7 @@ const COLLECTIONS = [
     date: "November 7",
     time: "11:00 AM to 4:30 PM",
     price: 595,
+    location: "Mint Studios",
     bookingUrl: ""
   },
   {
@@ -25,6 +28,7 @@ const COLLECTIONS = [
     date: "November 8",
     time: "2:00 PM to 4:30 PM",
     price: 595,
+    location: "Mint Studios",
     bookingUrl: ""
   },
   {
@@ -32,6 +36,7 @@ const COLLECTIONS = [
     date: "November 14",
     time: "1:00 PM to 3:00 PM",
     price: 650,
+    location: "Limited Holiday Story",
     bookingUrl: ""
   },
   {
@@ -39,7 +44,7 @@ const COLLECTIONS = [
     date: "November 15",
     time: "3:00 PM to 5:00 PM",
     price: 650,
-    note: "4 sessions",
+    location: "Vintage Car Event · 4 sessions",
     bookingUrl: ""
   },
   {
@@ -47,6 +52,7 @@ const COLLECTIONS = [
     date: "November 21",
     time: "11:00 AM to 4:30 PM",
     price: 595,
+    location: "Mint Studios",
     bookingUrl: ""
   },
   {
@@ -54,6 +60,7 @@ const COLLECTIONS = [
     date: "November 22",
     time: "1:30 PM to 3:30 PM",
     price: 595,
+    location: "Mint Studios",
     bookingUrl: ""
   },
   {
@@ -61,15 +68,87 @@ const COLLECTIONS = [
     date: "November 28",
     time: "3:00 PM to 5:00 PM",
     price: 650,
+    location: "Outdoor Coastal Story",
     bookingUrl: ""
   }
 ];
+
+const STORY_IMAGES = {
+  "The Winter Cottage": {
+    src: "assets/winter-cottage.webp",
+    alt: "Soft icy blue and white Christmas cottage interior"
+  },
+  "Pine + Plaid": {
+    src: "assets/pine-plaid.webp",
+    alt: "Outdoor Christmas tree with plaid details, wrapped gifts, and evergreens"
+  },
+  "A Crimson Christmas": {
+    src: "assets/crimson-christmas.webp",
+    alt: "Deep crimson and evergreen traditional Christmas room"
+  },
+  "Velvet December": {
+    src: "assets/velvet-december.webp",
+    alt: "Soft mauve and dusty blue Christmas living room"
+  },
+  "Little Women": {
+    src: "assets/little-women.webp",
+    alt: "Warm old-fashioned candlelit Christmas room with stockings, plaid, and handmade details"
+  },
+  "Christmas Bound": {
+    src: "assets/christmas-bound.webp",
+    alt: "Vintage red car filled with Christmas gifts and greenery"
+  },
+  "Chestnut Christmas": {
+    src: "assets/chestnut-christmas.webp",
+    alt: "Warm chestnut brown and cream Christmas living room"
+  },
+  "The Winter Carousel": {
+    src: "assets/winter-carousel.webp",
+    alt: "White and gold winter carousel Christmas scene"
+  },
+  "Salt + Pine": {
+    src: "assets/salt-pine.webp",
+    alt: "South Florida Christmas setting with sand, palms, warm light, and a softly decorated tree"
+  }
+};
 
 const currency = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
   maximumFractionDigits: 0
 });
+
+function loadPhotoStyles() {
+  if (document.querySelector('link[href="media.css"]')) return;
+
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = "media.css";
+  document.head.appendChild(link);
+}
+
+function attachStoryImages() {
+  document.querySelectorAll(".story").forEach((story) => {
+    const heading = story.querySelector("h3");
+    if (!heading) return;
+
+    const image = STORY_IMAGES[heading.textContent.trim()];
+    if (!image || story.querySelector(".story-media")) return;
+
+    const figure = document.createElement("figure");
+    figure.className = "story-media";
+
+    const img = document.createElement("img");
+    img.src = image.src;
+    img.alt = image.alt;
+    img.loading = "lazy";
+    img.decoding = "async";
+
+    figure.appendChild(img);
+    story.prepend(figure);
+    story.classList.add("has-photo");
+  });
+}
 
 function renderSchedule() {
   const schedule = document.querySelector("#schedule-list");
@@ -107,10 +186,9 @@ function setSelectedStory(name) {
   if (select && select.value !== item.name) select.value = item.name;
 
   if (output) {
-    const note = item.note ? ` · ${item.note}` : "";
     output.innerHTML = `
       <strong>${item.name}</strong>
-      <span>${item.date} · ${item.time} · ${currency.format(item.price)}${note}</span>
+      <span>${item.date} · ${item.time} · ${currency.format(item.price)} · ${item.location}</span>
     `;
   }
 
@@ -127,7 +205,7 @@ function setSelectedStory(name) {
     button.textContent = "Booking link coming soon";
     button.classList.add("is-disabled");
     button.setAttribute("aria-disabled", "true");
-    status.textContent = "Booking access will appear here once the reservation link is connected.";
+    status.textContent = "This collection is ready for its booking URL. Add the link in app.js before sharing the page with clients.";
   }
 }
 
@@ -147,6 +225,8 @@ function updatePreviewRibbon() {
   }
 }
 
+loadPhotoStyles();
+attachStoryImages();
 renderSchedule();
 populateBookingSelect();
 bindStoryLinks();
