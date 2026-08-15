@@ -4,7 +4,6 @@ const COLLECTIONS = [
     date: "October 24",
     time: "11:30 AM to 2:30 PM",
     price: 595,
-    location: "The Cottage · Indoors",
     bookingUrl: ""
   },
   {
@@ -12,7 +11,6 @@ const COLLECTIONS = [
     date: "October 24",
     time: "2:30 PM to 5:00 PM",
     price: 650,
-    location: "The Cottage · Outdoors",
     bookingUrl: ""
   },
   {
@@ -20,7 +18,6 @@ const COLLECTIONS = [
     date: "November 7",
     time: "11:00 AM to 4:30 PM",
     price: 595,
-    location: "Mint Studios",
     bookingUrl: ""
   },
   {
@@ -28,7 +25,13 @@ const COLLECTIONS = [
     date: "November 8",
     time: "2:00 PM to 4:30 PM",
     price: 595,
-    location: "Mint Studios",
+    bookingUrl: ""
+  },
+  {
+    name: "Little Women",
+    date: "November 14",
+    time: "1:00 PM to 3:00 PM",
+    price: 650,
     bookingUrl: ""
   },
   {
@@ -36,7 +39,7 @@ const COLLECTIONS = [
     date: "November 15",
     time: "3:00 PM to 5:00 PM",
     price: 650,
-    location: "Vintage Car Event · 4 sessions",
+    note: "4 sessions",
     bookingUrl: ""
   },
   {
@@ -44,7 +47,6 @@ const COLLECTIONS = [
     date: "November 21",
     time: "11:00 AM to 4:30 PM",
     price: 595,
-    location: "Mint Studios",
     bookingUrl: ""
   },
   {
@@ -52,7 +54,13 @@ const COLLECTIONS = [
     date: "November 22",
     time: "1:30 PM to 3:30 PM",
     price: 595,
-    location: "Mint Studios",
+    bookingUrl: ""
+  },
+  {
+    name: "Salt + Pine",
+    date: "November 28",
+    time: "3:00 PM to 5:00 PM",
+    price: 650,
     bookingUrl: ""
   }
 ];
@@ -99,9 +107,10 @@ function setSelectedStory(name) {
   if (select && select.value !== item.name) select.value = item.name;
 
   if (output) {
+    const note = item.note ? ` · ${item.note}` : "";
     output.innerHTML = `
       <strong>${item.name}</strong>
-      <span>${item.date} · ${item.time} · ${currency.format(item.price)} · ${item.location}</span>
+      <span>${item.date} · ${item.time} · ${currency.format(item.price)}${note}</span>
     `;
   }
 
@@ -118,7 +127,7 @@ function setSelectedStory(name) {
     button.textContent = "Booking link coming soon";
     button.classList.add("is-disabled");
     button.setAttribute("aria-disabled", "true");
-    status.textContent = "This collection is ready for its booking URL. Add the link in app.js before sharing the page with clients.";
+    status.textContent = "Booking access will appear here once the reservation link is connected.";
   }
 }
 
