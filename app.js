@@ -1,123 +1,4 @@
-const COLLECTIONS = [
-  {
-    name: "The Winter Cottage",
-    date: "October 24",
-    time: "11:30 AM to 2:30 PM",
-    price: 595,
-    location: "The Cottage · Indoors",
-    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/The-Winter-Cottage"
-  },
-  {
-    name: "Pine + Plaid",
-    date: "October 24",
-    time: "2:30 PM to 5:00 PM",
-    price: 650,
-    location: "The Cottage · Outdoors",
-    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/Pine-Plaid"
-  },
-  {
-    name: "A Crimson Christmas",
-    date: "November 7",
-    time: "11:00 AM to 4:30 PM",
-    price: 595,
-    location: "Mint Studios",
-    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/A-Crimson-Christmas"
-  },
-  {
-    name: "Velvet December",
-    date: "November 8",
-    time: "2:00 PM to 4:30 PM",
-    price: 595,
-    location: "Mint Studios",
-    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/Velvet-December"
-  },
-  {
-    name: "Little Women",
-    date: "November 14",
-    time: "1:00 PM to 3:00 PM",
-    price: 650,
-    location: "Limited Holiday Story",
-    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/Little-Women"
-  },
-  {
-    name: "Christmas Bound",
-    date: "November 15",
-    time: "3:00 PM to 5:00 PM",
-    price: 650,
-    location: "Vintage Car Event · 4 sessions",
-    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/Christmas-Bound"
-  },
-  {
-    name: "Chestnut Christmas",
-    date: "November 21",
-    time: "11:00 AM to 4:30 PM",
-    price: 595,
-    location: "Mint Studios",
-    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/Chestnut-Christmas"
-  },
-  {
-    name: "The Winter Carousel",
-    date: "November 22",
-    time: "1:30 PM to 3:30 PM",
-    price: 595,
-    location: "Mint Studios",
-    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/The-Winter-Carousel"
-  },
-  {
-    name: "Salt + Pine",
-    date: "November 28",
-    time: "3:00 PM to 5:00 PM",
-    price: 650,
-    location: "Outdoor Coastal Story",
-    bookingUrl: ""
-  }
-];
-
-const STORY_IMAGES = {
-  "The Winter Cottage": {
-    position: "0% 0%",
-    alt: "Soft icy blue and white Christmas cottage interior"
-  },
-  "Pine + Plaid": {
-    position: "50% 0%",
-    alt: "Outdoor Christmas tree with plaid details, wrapped gifts, and evergreens"
-  },
-  "A Crimson Christmas": {
-    position: "100% 0%",
-    alt: "Deep crimson and evergreen traditional Christmas room"
-  },
-  "Velvet December": {
-    position: "0% 50%",
-    alt: "Soft mauve and dusty blue Christmas living room"
-  },
-  "Little Women": {
-    position: "50% 50%",
-    alt: "Warm old-fashioned candlelit Christmas room with stockings, plaid, and handmade details"
-  },
-  "Christmas Bound": {
-    position: "100% 50%",
-    alt: "Vintage red car filled with Christmas gifts and greenery"
-  },
-  "Chestnut Christmas": {
-    position: "0% 100%",
-    alt: "Warm chestnut brown and cream Christmas living room"
-  },
-  "The Winter Carousel": {
-    position: "50% 100%",
-    alt: "White and gold winter carousel Christmas scene"
-  },
-  "Salt + Pine": {
-    position: "100% 100%",
-    alt: "South Florida Christmas setting with sand, palms, warm light, and a softly decorated tree"
-  }
-};
-
-const STORY_SPRITE_PARTS = [
-  "assets/story-sprite/00.txt",
-  "assets/story-sprite/01.txt",
-  "assets/story-sprite/02.txt",
-  "assets/story-sprite/03.txt"
-];
+const COLLECTIONS = window.HOLIDAY_COLLECTIONS || [];
 
 const currency = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -125,50 +6,103 @@ const currency = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0
 });
 
-function applyBrandMark() {
-  document.querySelectorAll('img[src="assets/ec-mark.webp"]').forEach((img) => {
-    img.src = "assets/ec-oval.webp";
-    img.classList.add("ec-oval-mark");
+function bindImageFallbacks(root = document) {
+  root.querySelectorAll(".story-media img, .booking-visual img").forEach((img) => {
+    if (img.dataset.fallbackBound === "true") return;
+    img.dataset.fallbackBound = "true";
+
+    const figure = img.closest(".story-media, .booking-visual");
+    if (!figure) return;
+
+    const showFallback = () => {
+      if (!img.isConnected || figure.classList.contains("is-error")) return;
+
+      const fallback = document.createElement("span");
+      fallback.className = "story-media-fallback";
+      fallback.textContent = "Collection preview unavailable";
+
+      figure.classList.add("is-error");
+      figure.setAttribute("role", "img");
+      figure.setAttribute("aria-label", img.alt || "Collection preview unavailable");
+      if (figure.classList.contains("booking-visual")) {
+        img.hidden = true;
+      } else {
+        img.remove();
+      }
+      figure.appendChild(fallback);
+    };
+
+    img.addEventListener("error", showFallback, { once: true });
+    if (img.complete && img.naturalWidth === 0) showFallback();
   });
 }
 
-async function loadStorySprite() {
-  const parts = await Promise.all(STORY_SPRITE_PARTS.map(async (path) => {
-    const response = await fetch(path, { cache: "force-cache" });
-    if (!response.ok) throw new Error(`Could not load ${path}: ${response.status}`);
-    return response.text();
-  }));
+function setupStoryCarousel() {
+  const carousel = document.querySelector("#story-carousel");
+  const count = document.querySelector("#carousel-count");
+  const buttons = [...document.querySelectorAll("[data-carousel-direction]")];
+  if (!carousel || !count) return;
 
-  const base64 = parts.join("").replace(/\s+/g, "");
-  return `data:image/webp;base64,${base64}`;
-}
+  const slides = [...carousel.querySelectorAll(".story")];
+  if (!slides.length) return;
 
-async function attachStoryImages() {
-  let sprite;
-  try {
-    sprite = await loadStorySprite();
-  } catch (error) {
-    console.error("Christmas collection photography failed to load", error);
-    return;
-  }
+  let currentIndex = 0;
+  let frame = 0;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  document.querySelectorAll(".story").forEach((story) => {
-    const heading = story.querySelector("h3");
-    if (!heading) return;
+  const slideLeft = (slide) => (
+    slide.getBoundingClientRect().left
+    - carousel.getBoundingClientRect().left
+    + carousel.scrollLeft
+  );
 
-    const image = STORY_IMAGES[heading.textContent.trim()];
-    if (!image || story.querySelector(".story-media")) return;
+  const update = () => {
+    currentIndex = slides.reduce((closest, slide, index) => (
+      Math.abs(slideLeft(slide) - carousel.scrollLeft)
+        < Math.abs(slideLeft(slides[closest]) - carousel.scrollLeft)
+        ? index
+        : closest
+    ), 0);
 
-    const figure = document.createElement("figure");
-    figure.className = "story-media";
-    figure.setAttribute("role", "img");
-    figure.setAttribute("aria-label", image.alt);
-    figure.style.backgroundImage = `url("${sprite}")`;
-    figure.style.backgroundPosition = image.position;
+    count.textContent = `${String(currentIndex + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+    buttons.forEach((button) => {
+      const direction = Number(button.dataset.carouselDirection);
+      button.disabled = (
+        (direction < 0 && currentIndex === 0)
+        || (direction > 0 && currentIndex === slides.length - 1)
+      );
+    });
+  };
 
-    story.prepend(figure);
-    story.classList.add("has-photo");
+  const move = (direction) => {
+    const targetIndex = Math.min(
+      slides.length - 1,
+      Math.max(0, currentIndex + direction)
+    );
+
+    carousel.scrollTo({
+      left: slideLeft(slides[targetIndex]),
+      behavior: reducedMotion ? "auto" : "smooth"
+    });
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => move(Number(button.dataset.carouselDirection)));
   });
+
+  carousel.addEventListener("keydown", (event) => {
+    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+    event.preventDefault();
+    move(event.key === "ArrowLeft" ? -1 : 1);
+  });
+
+  carousel.addEventListener("scroll", () => {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(update);
+  }, { passive: true });
+
+  window.addEventListener("resize", update);
+  update();
 }
 
 function renderSchedule() {
@@ -176,64 +110,109 @@ function renderSchedule() {
   if (!schedule) return;
 
   schedule.innerHTML = COLLECTIONS.map((item) => `
-    <div class="schedule-row">
+    <a class="schedule-row" href="booking.html?story=${item.slug}" aria-label="View booking details for ${item.name}">
       <time>${item.date}</time>
       <strong>${item.name}</strong>
       <span class="schedule-time">${item.time}</span>
       <span class="price">${currency.format(item.price)}</span>
-    </div>
+      <span class="schedule-action">Details →</span>
+    </a>
   `).join("");
 }
 
-function populateBookingSelect() {
+function setBookingStory(item, updateUrl = false) {
+  const page = document.querySelector("[data-booking-page]");
+  if (!page || !item) return;
+
   const select = document.querySelector("#story-select");
-  if (!select) return;
+  const title = document.querySelector("#booking-title");
+  const feeling = document.querySelector("#booking-feeling");
+  const description = document.querySelector("#booking-description");
+  const think = document.querySelector("#booking-think");
+  const date = document.querySelector("#booking-date");
+  const time = document.querySelector("#booking-time");
+  const price = document.querySelector("#booking-price");
+  const location = document.querySelector("#booking-location");
+  const status = document.querySelector("#booking-status");
+  const button = document.querySelector("#booking-button");
+  const visual = document.querySelector("#booking-visual");
+  const image = document.querySelector("#booking-image");
+  const pending = document.querySelector("#booking-image-pending");
+
+  page.style.setProperty("--accent", item.accent);
+  if (select) select.value = item.slug;
+  if (title) title.textContent = item.name;
+  if (feeling) feeling.textContent = item.feeling;
+  if (description) description.textContent = item.description;
+  if (think) think.innerHTML = `<strong>Think:</strong> ${item.think}`;
+  if (date) date.textContent = item.date;
+  if (time) time.textContent = item.time;
+  if (price) price.textContent = currency.format(item.price);
+  if (location) location.textContent = item.location;
+
+  if (visual && image && pending) {
+    visual.classList.remove("is-error", "is-pending");
+    visual.querySelector(".story-media-fallback")?.remove();
+
+    if (item.image) {
+      image.hidden = false;
+      image.src = item.image;
+      image.alt = item.imageAlt;
+      image.dataset.fallbackBound = "false";
+      pending.hidden = true;
+      bindImageFallbacks(visual);
+    } else {
+      image.hidden = true;
+      image.removeAttribute("src");
+      image.alt = "";
+      pending.hidden = false;
+      visual.classList.add("is-pending");
+    }
+  }
+
+  if (button && status) {
+    if (item.bookingUrl) {
+      button.href = item.bookingUrl;
+      button.textContent = `Continue to book ${item.name}`;
+      button.classList.remove("is-disabled");
+      button.setAttribute("aria-disabled", "false");
+      status.textContent = "Your reservation is secured once the required deposit is received within three days.";
+    } else {
+      button.href = "#";
+      button.textContent = "Booking link coming soon";
+      button.classList.add("is-disabled");
+      button.setAttribute("aria-disabled", "true");
+      status.textContent = "Salt + Pine booking access will be added here once its reservation link is live.";
+    }
+  }
+
+  document.title = `${item.name} Booking Details | EC Creative Studios`;
+
+  if (updateUrl) {
+    const nextUrl = new URL(window.location.href);
+    nextUrl.searchParams.set("story", item.slug);
+    window.history.replaceState({}, "", nextUrl);
+  }
+}
+
+function setupBookingPage() {
+  const page = document.querySelector("[data-booking-page]");
+  const select = document.querySelector("#story-select");
+  if (!page || !select || !COLLECTIONS.length) return;
 
   select.innerHTML = COLLECTIONS.map((item) => (
-    `<option value="${item.name}">${item.name}</option>`
+    `<option value="${item.slug}">${item.name}</option>`
   )).join("");
 
-  select.addEventListener("change", () => setSelectedStory(select.value));
-  setSelectedStory(select.value);
-}
+  const requestedSlug = new URLSearchParams(window.location.search).get("story");
+  const selected = COLLECTIONS.find((item) => item.slug === requestedSlug) || COLLECTIONS[0];
 
-function setSelectedStory(name) {
-  const item = COLLECTIONS.find((story) => story.name === name) || COLLECTIONS[0];
-  const output = document.querySelector("#selected-story");
-  const button = document.querySelector("#booking-button");
-  const status = document.querySelector("#booking-status");
-  const select = document.querySelector("#story-select");
-
-  if (select && select.value !== item.name) select.value = item.name;
-
-  if (output) {
-    output.innerHTML = `
-      <strong>${item.name}</strong>
-      <span>${item.date} · ${item.time} · ${currency.format(item.price)} · ${item.location}</span>
-    `;
-  }
-
-  if (!button || !status) return;
-
-  if (item.bookingUrl) {
-    button.href = item.bookingUrl;
-    button.textContent = `Book ${item.name}`;
-    button.classList.remove("is-disabled");
-    button.setAttribute("aria-disabled", "false");
-    status.textContent = "Booking is open. Your reservation is secured once the required deposit is received within three days.";
-  } else {
-    button.href = "#";
-    button.textContent = "Booking link coming soon";
-    button.classList.add("is-disabled");
-    button.setAttribute("aria-disabled", "true");
-    status.textContent = "Salt + Pine booking access will be added here once its reservation link is live.";
-  }
-}
-
-function bindStoryLinks() {
-  document.querySelectorAll("[data-select-story]").forEach((link) => {
-    link.addEventListener("click", () => setSelectedStory(link.dataset.selectStory));
+  select.addEventListener("change", () => {
+    const item = COLLECTIONS.find((collection) => collection.slug === select.value);
+    setBookingStory(item, true);
   });
+
+  setBookingStory(selected, Boolean(requestedSlug && requestedSlug !== selected.slug));
 }
 
 function updatePreviewRibbon() {
@@ -246,9 +225,8 @@ function updatePreviewRibbon() {
   }
 }
 
-applyBrandMark();
+bindImageFallbacks();
+setupStoryCarousel();
 renderSchedule();
-populateBookingSelect();
-bindStoryLinks();
+setupBookingPage();
 updatePreviewRibbon();
-attachStoryImages();
