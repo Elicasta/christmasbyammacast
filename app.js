@@ -75,42 +75,49 @@ const COLLECTIONS = [
 
 const STORY_IMAGES = {
   "The Winter Cottage": {
-    src: "assets/winter-cottage.webp",
+    position: "0% 0%",
     alt: "Soft icy blue and white Christmas cottage interior"
   },
   "Pine + Plaid": {
-    src: "assets/pine-plaid.webp",
+    position: "50% 0%",
     alt: "Outdoor Christmas tree with plaid details, wrapped gifts, and evergreens"
   },
   "A Crimson Christmas": {
-    src: "assets/crimson-christmas.webp",
+    position: "100% 0%",
     alt: "Deep crimson and evergreen traditional Christmas room"
   },
   "Velvet December": {
-    src: "assets/velvet-december.webp",
+    position: "0% 50%",
     alt: "Soft mauve and dusty blue Christmas living room"
   },
   "Little Women": {
-    src: "assets/little-women.webp",
+    position: "50% 50%",
     alt: "Warm old-fashioned candlelit Christmas room with stockings, plaid, and handmade details"
   },
   "Christmas Bound": {
-    src: "assets/christmas-bound.webp",
+    position: "100% 50%",
     alt: "Vintage red car filled with Christmas gifts and greenery"
   },
   "Chestnut Christmas": {
-    src: "assets/chestnut-christmas.webp",
+    position: "0% 100%",
     alt: "Warm chestnut brown and cream Christmas living room"
   },
   "The Winter Carousel": {
-    src: "assets/winter-carousel.webp",
+    position: "50% 100%",
     alt: "White and gold winter carousel Christmas scene"
   },
   "Salt + Pine": {
-    src: "assets/salt-pine.webp",
+    position: "100% 100%",
     alt: "South Florida Christmas setting with sand, palms, warm light, and a softly decorated tree"
   }
 };
+
+const STORY_SPRITE_PARTS = [
+  "assets/story-sprite/00.txt",
+  "assets/story-sprite/01.txt",
+  "assets/story-sprite/02.txt",
+  "assets/story-sprite/03.txt"
+];
 
 const currency = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -118,8 +125,89 @@ const currency = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0
 });
 
-function attachStoryImages() {
-  document.querySelectorAll(".story").forEach((story, index) => {
+function installRuntimeStyles() {
+  const style = document.createElement("style");
+  style.dataset.runtimeFixes = "christmas-collection";
+  style.textContent = `
+    .story-media {
+      aspect-ratio: 8 / 5 !important;
+      background-color: #d7d2c8;
+      background-repeat: no-repeat;
+      background-size: 300% 300%;
+      overflow: hidden;
+      transform: translateZ(0);
+    }
+    .story-wide .story-media { aspect-ratio: 8 / 5 !important; }
+
+    .ec-oval-mark {
+      display: block !important;
+      width: 76px !important;
+      height: 38px !important;
+      object-fit: contain !important;
+      flex: 0 0 auto;
+    }
+    .hero-byline {
+      display: flex !important;
+      align-items: center;
+      gap: .75rem !important;
+    }
+    .hero-byline .ec-oval-mark {
+      width: 86px !important;
+      height: 42px !important;
+    }
+    .footer-ec .ec-oval-mark {
+      width: 92px !important;
+      height: 44px !important;
+    }
+
+    @media (max-width: 680px) {
+      .brand .ec-oval-mark {
+        width: 58px !important;
+        height: 30px !important;
+      }
+      .hero-byline .ec-oval-mark {
+        width: 72px !important;
+        height: 36px !important;
+      }
+      .footer-ec .ec-oval-mark {
+        width: 78px !important;
+        height: 38px !important;
+      }
+      .hero h1 > em { margin-top: .16em !important; }
+      .collection-intro { padding-top: 4.25rem !important; }
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+function applyBrandMark() {
+  document.querySelectorAll('img[src="assets/ec-mark.webp"]').forEach((img) => {
+    img.src = "assets/ec-oval.webp";
+    img.classList.add("ec-oval-mark");
+  });
+}
+
+async function loadStorySprite() {
+  const parts = await Promise.all(STORY_SPRITE_PARTS.map(async (path) => {
+    const response = await fetch(path, { cache: "force-cache" });
+    if (!response.ok) throw new Error(`Could not load ${path}: ${response.status}`);
+    return response.text();
+  }));
+
+  const base64 = parts.join("").replace(/\s+/g, "");
+  return `data:image/webp;base64,${base64}`;
+}
+
+async function attachStoryImages() {
+  let sprite;
+  try {
+    sprite = await loadStorySprite();
+  } catch (error) {
+    console.error("Christmas collection photography failed to load", error);
+    return;
+  }
+
+  document.querySelectorAll(".story").forEach((story) => {
     const heading = story.querySelector("h3");
     if (!heading) return;
 
@@ -128,20 +216,11 @@ function attachStoryImages() {
 
     const figure = document.createElement("figure");
     figure.className = "story-media";
+    figure.setAttribute("role", "img");
+    figure.setAttribute("aria-label", image.alt);
+    figure.style.backgroundImage = `url("${sprite}")`;
+    figure.style.backgroundPosition = image.position;
 
-    const img = document.createElement("img");
-    img.src = image.src;
-    img.alt = image.alt;
-    img.loading = index === 0 ? "eager" : "lazy";
-    img.decoding = "async";
-    if (index === 0) img.fetchPriority = "high";
-
-    img.addEventListener("error", () => {
-      figure.remove();
-      story.classList.remove("has-photo");
-    }, { once: true });
-
-    figure.appendChild(img);
     story.prepend(figure);
     story.classList.add("has-photo");
   });
@@ -222,8 +301,10 @@ function updatePreviewRibbon() {
   }
 }
 
-attachStoryImages();
+installRuntimeStyles();
+applyBrandMark();
 renderSchedule();
 populateBookingSelect();
 bindStoryLinks();
 updatePreviewRibbon();
+attachStoryImages();
