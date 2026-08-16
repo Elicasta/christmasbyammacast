@@ -81,7 +81,7 @@ window.HOLIDAY_COLLECTIONS = Object.freeze([
     accent: "#6f594c",
     image: "assets/little-women.webp",
     imageAlt: "Warm old-fashioned Christmas fireside room with stockings, plaid, books, and handmade details",
-    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/Little-Women"
+    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/christmas-house"
   },
   {
     slug: "christmas-bound",
@@ -145,6 +145,6 @@ window.HOLIDAY_COLLECTIONS = Object.freeze([
     accent: "#819189",
     image: "assets/salt-pine.webp",
     imageAlt: "South Florida Christmas courtyard with a white cottage, warm sand, natural pine, and soft coastal holiday details",
-    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/Costal-Christmas"
+    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/coastal-christmas"
   }
 ].map(Object.freeze));
