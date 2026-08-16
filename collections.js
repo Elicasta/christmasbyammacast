@@ -48,7 +48,7 @@ window.HOLIDAY_COLLECTIONS = Object.freeze([
     accent: "#7d2027",
     image: "assets/christmas-parlour.webp",
     imageAlt: "Traditional Christmas parlour with deep burgundy velvet, candlelight, evergreen garland, a wreath, and a richly decorated tree",
-    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/A-Crimson-Christmas"
+    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/Christmas-Parlour"
   },
   {
     slug: "velvet-december",
@@ -145,6 +145,6 @@ window.HOLIDAY_COLLECTIONS = Object.freeze([
     accent: "#819189",
     image: "assets/salt-pine.webp",
     imageAlt: "South Florida Christmas courtyard with a white cottage, warm sand, natural pine, and soft coastal holiday details",
-    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/Salt-Pine"
+    bookingUrl: "https://ECCreativeStudio.pixieset.com/booking/Costal-Christmas"
   }
 ].map(Object.freeze));
