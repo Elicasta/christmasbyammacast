@@ -28,7 +28,13 @@ Legacy query slugs are mapped forward in `app.js` so older shared links continue
 
 Booking buttons use the Pixieset reservation URLs stored in `collections.js`. All nine collections currently have active reservation links.
 
-The renamed first-party routes do not rename external Pixieset reservation URLs. Keep the working Pixieset URL as the source of truth unless the reservation page itself is renamed.
+Renamed first-party routes and Pixieset booking slugs are separate. Current renamed-story mappings are:
+
+- The Christmas Parlour → first-party `/christmas-parlour` → Pixieset `/booking/Christmas-Parlour`
+- The Christmas House → first-party `/christmas-house` → Pixieset `/booking/Little-Women`
+- A Coastal Christmas → first-party `/coastal-christmas` → Pixieset `/booking/Costal-Christmas`
+
+Keep the Pixieset reservation slug exactly as configured in Pixieset, even when it differs from the public story name.
 
 Add or update the `bookingUrl` value for a collection in `collections.js`:
 
