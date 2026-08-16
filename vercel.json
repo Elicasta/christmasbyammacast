@@ -1,0 +1,8 @@
+{
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/christmas-parlour", "destination": "/booking.html" },
+    { "source": "/christmas-house", "destination": "/booking.html" },
+    { "source": "/coastal-christmas", "destination": "/booking.html" }
+  ]
+}
