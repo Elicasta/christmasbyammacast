@@ -1,4 +1,13 @@
 const COLLECTIONS = window.HOLIDAY_COLLECTIONS || [];
+const LEGACY_STORY_SLUGS = Object.freeze({
+  "a-crimson-christmas": "christmas-parlour",
+  "little-women": "christmas-house",
+  "salt-pine": "coastal-christmas"
+});
+
+function storyHref(item) {
+  return item.publicPath || `booking.html?story=${encodeURIComponent(item.slug)}`;
+}
 
 function bindImageFallbacks(root = document) {
   root.querySelectorAll(".story-media img, .booking-visual img").forEach((img) => {
@@ -104,7 +113,7 @@ function renderSchedule() {
   if (!schedule) return;
 
   schedule.innerHTML = COLLECTIONS.map((item) => `
-    <a class="schedule-row" href="booking.html?story=${item.slug}" aria-label="Book ${item.name}">
+    <a class="schedule-row" href="${storyHref(item)}" aria-label="Book ${item.name}">
       <time>${item.date}</time>
       <strong>${item.name}</strong>
       <span class="schedule-time">${item.time}</span>
@@ -130,6 +139,9 @@ function setBookingStory(item, updateUrl = false) {
   const visual = document.querySelector("#booking-visual");
   const image = document.querySelector("#booking-image");
   const pending = document.querySelector("#booking-image-pending");
+  const specialExperience = document.querySelector("#booking-special-experience");
+  const experienceTitle = document.querySelector("#booking-experience-title");
+  const experienceDescription = document.querySelector("#booking-experience-description");
 
   page.style.setProperty("--accent", item.accent);
   if (select) select.value = item.slug;
@@ -140,6 +152,18 @@ function setBookingStory(item, updateUrl = false) {
   if (date) date.textContent = item.date;
   if (time) time.textContent = item.time;
   if (location) location.textContent = item.location;
+
+  if (specialExperience && experienceTitle && experienceDescription) {
+    const hasExperience = Boolean(item.experienceTitle && item.experienceDescription);
+    specialExperience.hidden = !hasExperience;
+    if (hasExperience) {
+      experienceTitle.textContent = item.experienceTitle;
+      experienceDescription.textContent = item.experienceDescription;
+    } else {
+      experienceTitle.textContent = "";
+      experienceDescription.textContent = "";
+    }
+  }
 
   if (visual && image && pending) {
     visual.classList.remove("is-error", "is-pending");
@@ -175,15 +199,14 @@ function setBookingStory(item, updateUrl = false) {
       button.textContent = "Booking link coming soon";
       button.classList.add("is-disabled");
       button.setAttribute("aria-disabled", "true");
-      status.textContent = "Salt + Pine booking access will be added here once its reservation link is live.";
+      status.textContent = "Booking access will be added here once this story’s reservation link is live.";
     }
   }
 
   document.title = `${item.name} Booking Details | EC Creative Studios`;
 
   if (updateUrl) {
-    const nextUrl = new URL(window.location.href);
-    nextUrl.searchParams.set("story", item.slug);
+    const nextUrl = item.publicPath || `/booking.html?story=${encodeURIComponent(item.slug)}`;
     window.history.replaceState({}, "", nextUrl);
   }
 }
@@ -197,7 +220,11 @@ function setupBookingPage() {
     `<option value="${item.slug}">${item.name}</option>`
   )).join("");
 
-  const requestedSlug = new URLSearchParams(window.location.search).get("story");
+  const querySlug = new URLSearchParams(window.location.search).get("story");
+  const normalizedQuerySlug = querySlug ? (LEGACY_STORY_SLUGS[querySlug] || querySlug) : null;
+  const pathname = window.location.pathname.replace(/\/+$/, "") || "/";
+  const pathItem = COLLECTIONS.find((item) => item.publicPath === pathname);
+  const requestedSlug = pathItem?.slug || normalizedQuerySlug;
   const selected = COLLECTIONS.find((item) => item.slug === requestedSlug) || COLLECTIONS[0];
 
   select.addEventListener("change", () => {
@@ -205,7 +232,14 @@ function setupBookingPage() {
     setBookingStory(item, true);
   });
 
-  setBookingStory(selected, Boolean(requestedSlug && requestedSlug !== selected.slug));
+  const shouldCanonicalize = Boolean(
+    querySlug
+    && (
+      querySlug !== normalizedQuerySlug
+      || normalizedQuerySlug !== selected.slug
+    )
+  );
+  setBookingStory(selected, shouldCanonicalize);
 }
 
 function updatePreviewRibbon() {
