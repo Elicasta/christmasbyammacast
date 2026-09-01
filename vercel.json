@@ -1,7 +1,10 @@
 {
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/christmas-parlour", "destination": "/home-for-christmas", "permanent": true }
+  ],
   "rewrites": [
-    { "source": "/christmas-parlour", "destination": "/booking.html" },
+    { "source": "/home-for-christmas", "destination": "/booking.html" },
     { "source": "/coastal-christmas", "destination": "/booking.html" }
   ]
 }
