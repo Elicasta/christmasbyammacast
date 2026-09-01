@@ -1,7 +1,6 @@
 const COLLECTIONS = window.HOLIDAY_COLLECTIONS || [];
 const LEGACY_STORY_SLUGS = Object.freeze({
   "a-crimson-christmas": "christmas-parlour",
-  "little-women": "christmas-house",
   "salt-pine": "coastal-christmas"
 });
 
