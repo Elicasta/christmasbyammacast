@@ -459,6 +459,33 @@ button, select { font: inherit; }
   background: var(--green-dark);
   border-color: var(--green-dark);
 }
+.text-link.is-disabled {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--muted);
+  cursor: default;
+  pointer-events: none;
+}
+.story.is-sold-out .story-media img {
+  filter: saturate(.72);
+}
+.story-availability {
+  color: var(--red);
+  font-weight: 700;
+}
+.story-availability.is-sold-out {
+  color: var(--muted);
+}
+.schedule-row.is-sold-out {
+  color: rgba(255,255,255,.52);
+}
+.schedule-row.is-sold-out:hover {
+  color: rgba(255,255,255,.72);
+}
+.schedule-row.is-available .schedule-action {
+  color: #fff;
+  font-weight: 700;
+}
 
 .schedule {
   padding: 7rem 0;
