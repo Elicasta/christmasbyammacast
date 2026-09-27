@@ -1,6 +1,7 @@
 window.HOLIDAY_COLLECTIONS = Object.freeze([
   {
     slug: "the-winter-cottage",
+    spotsRemaining: 1,
     name: "The Winter Cottage",
     date: "October 24",
     shortDate: "Oct 24",
@@ -17,6 +18,7 @@ window.HOLIDAY_COLLECTIONS = Object.freeze([
   },
   {
     slug: "pine-plaid",
+    spotsRemaining: 0,
     name: "Pine + Plaid",
     date: "October 24",
     shortDate: "Oct 24",
@@ -34,6 +36,7 @@ window.HOLIDAY_COLLECTIONS = Object.freeze([
   },
   {
     slug: "home-for-christmas",
+    spotsRemaining: 0,
     publicPath: "/home-for-christmas",
     name: "Home for Christmas",
     date: "November 7",
@@ -52,6 +55,7 @@ window.HOLIDAY_COLLECTIONS = Object.freeze([
   },
   {
     slug: "christmas-bound",
+    spotsRemaining: 0,
     name: "Christmas Bound",
     date: "November 15",
     shortDate: "Nov 15",
@@ -68,6 +72,7 @@ window.HOLIDAY_COLLECTIONS = Object.freeze([
   },
   {
     slug: "chestnut-christmas",
+    spotsRemaining: 2,
     name: "Chestnut Christmas",
     date: "November 21",
     shortDate: "Nov 21",
@@ -85,6 +90,7 @@ window.HOLIDAY_COLLECTIONS = Object.freeze([
   },
   {
     slug: "the-winter-carousel",
+    spotsRemaining: 0,
     name: "The Winter Carousel",
     date: "November 22",
     shortDate: "Nov 22",
@@ -100,6 +106,7 @@ window.HOLIDAY_COLLECTIONS = Object.freeze([
   },
   {
     slug: "coastal-christmas",
+    spotsRemaining: 0,
     publicPath: "/coastal-christmas",
     name: "A Coastal Christmas",
     date: "November 28",
