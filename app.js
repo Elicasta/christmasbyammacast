@@ -9,6 +9,17 @@ function storyHref(item) {
   return item.publicPath || `booking.html?story=${encodeURIComponent(item.slug)}`;
 }
 
+function spotsRemaining(item) {
+  return Number.isFinite(item?.spotsRemaining) ? item.spotsRemaining : 0;
+}
+
+function availabilityLabel(item, detailed = false) {
+  const remaining = spotsRemaining(item);
+  if (remaining <= 0) return "Sold out";
+  if (remaining === 1) return detailed ? "Only 1 session left" : "1 session left";
+  return detailed ? `Only ${remaining} sessions left` : `${remaining} sessions left`;
+}
+
 function bindImageFallbacks(root = document) {
   root.querySelectorAll(".story-media img, .booking-visual img").forEach((img) => {
     if (img.dataset.fallbackBound === "true") return;
@@ -112,14 +123,18 @@ function renderSchedule() {
   const schedule = document.querySelector("#schedule-list");
   if (!schedule) return;
 
-  schedule.innerHTML = COLLECTIONS.map((item) => `
-    <a class="schedule-row" href="${storyHref(item)}" aria-label="Book ${item.name}">
-      <time>${item.date}</time>
-      <strong>${item.name}</strong>
-      <span class="schedule-time">${item.time}</span>
-      <span class="schedule-action">Book now →</span>
-    </a>
-  `).join("");
+  schedule.innerHTML = COLLECTIONS.map((item) => {
+    const soldOut = spotsRemaining(item) <= 0;
+    const label = availabilityLabel(item);
+    return `
+      <a class="schedule-row${soldOut ? " is-sold-out" : " is-available"}" href="${storyHref(item)}" aria-label="${soldOut ? `${item.name} is sold out` : `${item.name}, ${label}`}">
+        <time>${item.date}</time>
+        <strong>${item.name}</strong>
+        <span class="schedule-time">${item.time}</span>
+        <span class="schedule-action">${label}${soldOut ? "" : " →"}</span>
+      </a>
+    `;
+  }).join("");
 }
 
 function setBookingStory(item, updateUrl = false) {
@@ -188,12 +203,20 @@ function setBookingStory(item, updateUrl = false) {
   }
 
   if (button && status) {
-    if (item.bookingUrl) {
+    const remaining = spotsRemaining(item);
+
+    if (remaining <= 0) {
+      button.href = "#";
+      button.textContent = "Sold out";
+      button.classList.add("is-disabled");
+      button.setAttribute("aria-disabled", "true");
+      status.textContent = "This Christmas story is sold out.";
+    } else if (item.bookingUrl) {
       button.href = item.bookingUrl;
       button.textContent = `Book ${item.name}`;
       button.classList.remove("is-disabled");
       button.setAttribute("aria-disabled", "false");
-      status.textContent = "A deposit secures your reservation and is due within three days.";
+      status.textContent = `${availabilityLabel(item, true)}. A deposit secures your reservation and is due within three days.`;
     } else {
       button.href = "#";
       button.textContent = "Booking link coming soon";
@@ -217,7 +240,7 @@ function setupBookingPage() {
   if (!page || !select || !COLLECTIONS.length) return;
 
   select.innerHTML = COLLECTIONS.map((item) => (
-    `<option value="${item.slug}">${item.name}</option>`
+    `<option value="${item.slug}">${item.name} · ${availabilityLabel(item)}</option>`
   )).join("");
 
   const querySlug = new URLSearchParams(window.location.search).get("story");
@@ -248,7 +271,10 @@ function updatePreviewRibbon() {
 
   const publicLaunch = new Date("2026-09-01T00:00:00");
   if (Date.now() >= publicLaunch.getTime()) {
-    ribbon.innerHTML = "<span>The 2026 Holiday Collection is now open</span>";
+    const totalRemaining = COLLECTIONS.reduce((total, item) => total + Math.max(0, spotsRemaining(item)), 0);
+    ribbon.innerHTML = totalRemaining > 0
+      ? `<span>Only ${totalRemaining} holiday sessions remain</span>`
+      : "<span>The 2026 Holiday Collection is sold out</span>";
   }
 }
 
